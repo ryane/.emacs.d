@@ -6,18 +6,21 @@
 (require 'package)
 
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(ido-ubiquitous magit markdown-mode evil
-		      color-theme-sanityinc-tomorrow
-		      key-chord
-		      web-mode
-		      ruby-mode)
+(defvar my-packages '(ido-ubiquitous
+                      magit
+                      markdown-mode
+                      evil
+                      color-theme-sanityinc-tomorrow
+                      key-chord
+                      web-mode
+                      ruby-mode)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
