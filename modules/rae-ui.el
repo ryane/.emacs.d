@@ -1,14 +1,10 @@
-;; Colours
-(require 'color-theme-sanityinc-tomorrow)
-'(color-theme-sanitynyc-tomorrow-night)
-
 ;; Chrome
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
 (if (eq window-system 'ns)
   (menu-bar-mode 1)
-  (menu-bar-mode -1))
+  (menu-bar-mode 0))
 
 ;; Modeline
 (column-number-mode t)
