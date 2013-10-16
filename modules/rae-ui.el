@@ -1,14 +1,13 @@
 ;; Colours
 (require 'color-theme-sanityinc-tomorrow)
 '(color-theme-sanitynyc-tomorrow-night)
-;; (require 'color-theme-solarized)
-;; '(color-theme-solarized-light)
 
 ;; Chrome
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
-(unless (eq system-type 'darwin)
+(if (eq window-system 'ns)
+  (menu-bar-mode 1)
   (menu-bar-mode -1))
 
 ;; Modeline
