@@ -14,6 +14,7 @@
   (package-refresh-contents))
 
 (defvar my-packages '(ido-ubiquitous magit markdown-mode evil
+		      color-theme-sanityinc-tomorrow
 		      key-chord
 		      web-mode
 		      ruby-mode)
@@ -38,4 +39,3 @@
 ;; require packages in modules/
 (mapc 'load (directory-files module-dir nil "^[^#].*el$"))
 (server-start)
-
