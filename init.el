@@ -13,7 +13,10 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(ido-ubiquitous magit markdown-mode evil)
+(defvar my-packages '(ido-ubiquitous magit markdown-mode evil
+		      key-chord
+		      web-mode
+		      ruby-mode)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
