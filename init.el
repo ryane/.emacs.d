@@ -38,4 +38,9 @@
 
 ;; require packages in modules/
 (mapc 'load (directory-files module-dir nil "^[^#].*el$"))
+
+;; custom file
+(setq custom-file (concat emacs-dir "modules/rae-custom.el"))
+(load custom-file)
+
 (server-start)
