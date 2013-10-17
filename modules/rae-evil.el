@@ -6,6 +6,16 @@
 ;; evil-goto-mark seems to take precedence anyway
 (setq evil-toggle-key "C-`")
 
+;; leader mappings
+(global-evil-leader-mode)
+(evil-leader/set-leader ",")
+(evil-leader/set-key
+  "e" 'find-file
+  "b" 'switch-to-buffer
+  "," 'mode-line-other-buffer
+  "f" 'ag
+  "k" 'kill-buffer)
+
 ;; turn on evil
 (evil-mode 1)
 

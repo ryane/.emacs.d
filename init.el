@@ -16,7 +16,9 @@
 (defvar my-packages '(ido-ubiquitous
                       magit
                       markdown-mode
-                      evil
+                      exec-path-from-shell
+                      ag
+                      evil evil-leader
                       color-theme-sanityinc-tomorrow
                       key-chord
                       web-mode
@@ -45,5 +47,10 @@
 ;; custom file
 (setq custom-file (concat emacs-dir "modules/rae-custom.el"))
 (load custom-file)
+
+;; On OS X Emacs doesn't use the shell PATH if it's not started from
+;; the shell. Let's fix that:
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 (server-start)
