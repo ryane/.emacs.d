@@ -7,6 +7,8 @@
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
 (defun rae-ruby-mode-defaults ()
+  (inf-ruby-minor-mode +1)
+  (ruby-tools-mode +1)
   (flymake-ruby-load)
   (flymake-cursor-mode)
   (ruby-end-mode))

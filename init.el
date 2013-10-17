@@ -28,6 +28,7 @@
                       web-mode
                       flx-ido
                       projectile
+                      smartparens
                       flymake flymake-cursor flymake-shell
                       ruby-mode ruby-end ruby-tools inf-ruby flymake-ruby)
   "A list of packages to ensure are installed at launch.")

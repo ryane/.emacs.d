@@ -5,7 +5,11 @@
 '(tab-width 2)
 
 (delete-selection-mode t)
-(show-paren-mode t)
+
+;; smart pairing for all
+(require 'smartparens-config)
+(require 'smartparens-ruby)
+(show-smartparens-global-mode +1)
 
 ;; whitespace defaults
 (setq whitespace-style
@@ -17,6 +21,7 @@
 (defun rae-prog-mode-defaults ()
   "Default settings for all programming languages"
   (linum-mode)
+  (smartparens-mode +1)
   (whitespace-mode +1))
 (add-hook 'prog-mode-hook 'rae-prog-mode-defaults)
 (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
@@ -38,11 +43,6 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
-
-;; electric modes
-(electric-pair-mode t)
-(electric-indent-mode t)
-(electric-layout-mode t)
 
 ;; Autocompletion/snippets
 (global-set-key (kbd "M-'") 'hippie-expand)
