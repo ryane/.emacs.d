@@ -19,6 +19,7 @@
                       exec-path-from-shell
                       ag
                       evil evil-leader
+                      yasnippet
                       color-theme-sanityinc-tomorrow
                       key-chord
                       web-mode

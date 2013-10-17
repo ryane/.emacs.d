@@ -27,3 +27,14 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+
+;; Autocompletion/snippets
+(global-set-key (kbd "M-'") 'hippie-expand)
+(require 'yasnippet)
+;;(yas/initialize)
+(yas-global-mode 1)
+(yas/load-directory (concat emacs-dir "snippets"))
+
+;; Integrate hippie-expand with ya-snippet
+(add-to-list 'hippie-expand-try-functions-list
+             'yas/hippie-try-expand)
