@@ -22,7 +22,8 @@
                       color-theme-sanityinc-tomorrow
                       key-chord
                       web-mode
-                      ruby-mode)
+                      flymake flymake-cursor flymake-shell
+                      ruby-mode ruby-end ruby-tools inf-ruby flymake-ruby)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
