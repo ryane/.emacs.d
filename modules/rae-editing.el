@@ -46,7 +46,6 @@
 ;; Autocompletion/snippets
 (global-set-key (kbd "M-'") 'hippie-expand)
 (require 'yasnippet)
-;;(yas/initialize)
 (yas-global-mode 1)
 (yas/load-directory (concat emacs-dir "snippets"))
 
