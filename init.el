@@ -18,6 +18,7 @@
                       markdown-mode
                       exec-path-from-shell
                       ag
+                      auto-complete
                       evil evil-leader
                       yasnippet
                       color-theme-sanityinc-tomorrow
