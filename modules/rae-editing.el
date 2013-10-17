@@ -26,6 +26,12 @@
   (whitespace-mode +1))
 (add-hook 'text-mode-hook 'rae-text-mode-defaults)
 
+;; uniq buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+(setq uniquify-separator "/")
+(setq uniquify-ignore-buffers-re "^\\*")
+
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
