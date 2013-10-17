@@ -16,6 +16,13 @@
   "f" 'ag
   "k" 'kill-buffer)
 
+;; commenting
+(evilnc-default-hotkeys)
+
+;; surround
+(require 'surround)
+(global-surround-mode 1)
+
 ;; turn on evil
 (evil-mode 1)
 

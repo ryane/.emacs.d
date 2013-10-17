@@ -19,7 +19,7 @@
                       exec-path-from-shell
                       ag
                       auto-complete
-                      evil evil-leader
+                      evil evil-leader evil-nerd-commenter evil-matchit
                       yasnippet
                       color-theme-sanityinc-tomorrow
                       key-chord
