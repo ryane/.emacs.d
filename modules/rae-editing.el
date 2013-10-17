@@ -13,6 +13,7 @@
                    indentation empty space-after-tab tab-mark)))
 
 ;; programming defaults
+(require 'linum-relative)
 (defun rae-prog-mode-defaults ()
   "Default settings for all programming languages"
   (linum-mode)
