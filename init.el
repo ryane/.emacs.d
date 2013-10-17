@@ -23,6 +23,7 @@
                       evil evil-leader evil-nerd-commenter evil-matchit
                       yasnippet
                       color-theme-sanityinc-tomorrow
+                      zenburn-theme
                       key-chord
                       web-mode
                       projectile
