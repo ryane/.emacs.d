@@ -4,6 +4,9 @@
 (setq-default indent-tabs-mode nil)
 '(tab-width 2)
 
+(delete-selection-mode t)
+(show-paren-mode t)
+
 ;; whitespace defaults
 (setq whitespace-style
       (quote (face tabs trailing lines space-before-tab
@@ -27,6 +30,11 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+
+;; electric modes
+(electric-pair-mode t)
+(electric-indent-mode t)
+(electric-layout-mode t)
 
 ;; Autocompletion/snippets
 (global-set-key (kbd "M-'") 'hippie-expand)

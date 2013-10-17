@@ -8,5 +8,6 @@
 
 (defun rae-ruby-mode-defaults ()
   (flymake-ruby-load)
-  (flymake-cursor-mode))
+  (flymake-cursor-mode)
+  (ruby-end-mode))
 (add-hook 'ruby-mode-hook 'rae-ruby-mode-defaults)
