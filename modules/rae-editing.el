@@ -18,6 +18,7 @@
   (linum-mode)
   (whitespace-mode +1))
 (add-hook 'prog-mode-hook 'rae-prog-mode-defaults)
+(add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
 
 ;; text defaults
 (defun rae-text-mode-defaults ()
