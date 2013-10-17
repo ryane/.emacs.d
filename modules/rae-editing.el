@@ -50,6 +50,11 @@
 (yas-global-mode 1)
 (yas/load-directory (concat emacs-dir "snippets"))
 
+;; projectile is a project management mode
+(require 'projectile)
+(projectile-global-mode t)
+(diminish 'projectile-mode "Prjl")
+
 ;; Integrate hippie-expand with ya-snippet
 (add-to-list 'hippie-expand-try-functions-list
              'yas/hippie-try-expand)

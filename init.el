@@ -19,11 +19,13 @@
                       exec-path-from-shell
                       ag
                       auto-complete
+                      diminish
                       evil evil-leader evil-nerd-commenter evil-matchit
                       yasnippet
                       color-theme-sanityinc-tomorrow
                       key-chord
                       web-mode
+                      projectile
                       flymake flymake-cursor flymake-shell
                       ruby-mode ruby-end ruby-tools inf-ruby flymake-ruby)
   "A list of packages to ensure are installed at launch.")
