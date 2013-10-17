@@ -26,6 +26,7 @@
                       zenburn-theme
                       key-chord
                       web-mode
+                      flx-ido
                       projectile
                       flymake flymake-cursor flymake-shell
                       ruby-mode ruby-end ruby-tools inf-ruby flymake-ruby)
