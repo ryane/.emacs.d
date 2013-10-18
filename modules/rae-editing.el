@@ -18,6 +18,7 @@
 
 ;; programming defaults
 (require 'linum-relative)
+(setq linum-relative-format "%3s ")
 (defun rae-prog-mode-defaults ()
   "Default settings for all programming languages"
   (linum-mode)
