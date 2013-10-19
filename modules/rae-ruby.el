@@ -13,3 +13,5 @@
   (flymake-cursor-mode)
   (ruby-end-mode))
 (add-hook 'ruby-mode-hook 'rae-ruby-mode-defaults)
+
+(global-rbenv-mode)
