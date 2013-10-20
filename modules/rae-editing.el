@@ -81,6 +81,9 @@
 (require 'window-number)
 (window-number-meta-mode)
 
+;; winner mode
+(winner-mode 1)
+
 ;; highlight the current line
 (global-hl-line-mode +1)
 

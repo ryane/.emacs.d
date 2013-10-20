@@ -18,6 +18,7 @@
                       markdown-mode
                       exec-path-from-shell
                       window-number
+                      winner
                       ag
                       auto-complete
                       diminish
