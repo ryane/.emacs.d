@@ -6,6 +6,9 @@
 
 (delete-selection-mode t)
 
+;; spell-checking
+(setq-default ispell-program-name "aspell")
+(add-hook 'text-mode-hook 'flyspell-mode)
 ;; smart pairing for all
 (require 'smartparens-config)
 (require 'smartparens-ruby)
