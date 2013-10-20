@@ -27,6 +27,11 @@
 ;; turn on evil
 (evil-mode 1)
 
+;; evil-matchit
+(require 'evil-matchit)
+(require 'sgml-mode) ;; requires smgl-mode to be loaded
+(global-evil-matchit-mode 1)
+
 ;; use jk to exit insert mode
 ;; this has to be done after evil is turned on
 (setq key-chord-two-keys-delay 0.2)
