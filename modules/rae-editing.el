@@ -3,12 +3,16 @@
 ;; tabs and whitespace
 (setq-default indent-tabs-mode nil)
 '(tab-width 2)
-
 (delete-selection-mode t)
 
 ;; spell-checking
 (setq-default ispell-program-name "aspell")
 (add-hook 'text-mode-hook 'flyspell-mode)
+
+;; auto-fill
+;; not sure I want auto-fill yet, I might want a soft-wrap mode
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
 ;; smart pairing for all
 (require 'smartparens-config)
 (require 'smartparens-ruby)
