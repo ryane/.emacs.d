@@ -30,7 +30,7 @@
                       projectile
                       smartparens
                       flymake flymake-cursor flymake-shell
-                      ruby-mode ruby-end ruby-tools inf-ruby flymake-ruby)
+                      ruby-mode ruby-tools inf-ruby flymake-ruby rbenv)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
