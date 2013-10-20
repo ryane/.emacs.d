@@ -1,7 +1,6 @@
 ;; Function definitions
 ;; lifted from emacs-starter-kit
 
-(recentf-mode 1)
 (defun recentf-ido-find-file ()
   "Find a recent file using ido."
   (interactive)

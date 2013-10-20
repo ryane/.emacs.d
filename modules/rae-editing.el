@@ -65,6 +65,13 @@
 ;; activate it for all buffers
 (setq-default save-place t)
 
+;; save recent files
+(require 'recentf)
+(setq recentf-save-file (expand-file-name "recentf" save-dir)
+      recentf-max-saved-items 500
+      recentf-max-menu-items 15)
+(recentf-mode +1)
+
 ;; use shift + arrow keys to switch between visible buffers
 (require 'windmove)
 (windmove-default-keybindings)
