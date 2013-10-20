@@ -45,6 +45,11 @@
   "Packages not yet available in ELPA")
 (defvar module-dir (concat emacs-dir "modules/")
   "Where the real configuration happens")
+(defvar save-dir (concat emacs-dir "savefile/")
+  "Stores automatically generated save/history files")
+
+(unless (file-exists-p save-dir)
+  (make-directory save-dir))
 
 ;; add to load path
 (add-to-list 'load-path vendor-dir)

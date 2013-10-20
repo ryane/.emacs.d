@@ -1,9 +1,17 @@
 ;; Editing tweaks
 
 ;; tabs and whitespace
-(setq-default indent-tabs-mode nil)
-'(tab-width 2)
+(setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
+(setq-default tab-width 8)            ;; but maintain correct appearance
+
+;; delete the selection with a keypress
 (delete-selection-mode t)
+
+;; store all backup and autosave files in the tmp dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 ;; spell-checking
 (setq-default ispell-program-name "aspell")
@@ -51,11 +59,11 @@
 (setq uniquify-separator "/")
 (setq uniquify-ignore-buffers-re "^\\*")
 
-;; store all backup and autosave files in the tmp dir
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+;; saveplace remembers your location in a file when saving files
+(require 'saveplace)
+(setq save-place-file (expand-file-name "saveplace" save-dir))
+;; activate it for all buffers
+(setq-default save-place t)
 
 ;; Autocompletion/snippets
 (global-set-key (kbd "M-'") 'hippie-expand)
