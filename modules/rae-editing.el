@@ -27,6 +27,7 @@
 (show-smartparens-global-mode +1)
 
 ;; whitespace defaults
+(setq whitespace-line-column 80) ;; limit line length
 (setq whitespace-style
       (quote (face tabs trailing lines space-before-tab
                    indentation empty space-after-tab tab-mark)))
@@ -79,6 +80,10 @@
 ;; window numbers
 (require 'window-number)
 (window-number-meta-mode)
+
+;; highlight the current line
+(global-hl-line-mode +1)
+
 ;; Autocompletion/snippets
 (global-set-key (kbd "M-'") 'hippie-expand)
 (require 'yasnippet)
