@@ -65,6 +65,13 @@
 ;; activate it for all buffers
 (setq-default save-place t)
 
+;; use shift + arrow keys to switch between visible buffers
+(require 'windmove)
+(windmove-default-keybindings)
+
+;; window numbers
+(require 'window-number)
+(window-number-meta-mode)
 ;; Autocompletion/snippets
 (global-set-key (kbd "M-'") 'hippie-expand)
 (require 'yasnippet)

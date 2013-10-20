@@ -17,6 +17,7 @@
                       magit
                       markdown-mode
                       exec-path-from-shell
+                      window-number
                       ag
                       auto-complete
                       diminish
