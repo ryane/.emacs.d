@@ -23,6 +23,11 @@
       (quote (face tabs trailing lines space-before-tab
                    indentation empty space-after-tab tab-mark)))
 
+;; expand-region
+(require 'expand-region)
+(require 'ruby-mode-expansions)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
 ;; programming defaults
 (require 'linum-relative)
 (setq linum-relative-format "%3s ")
