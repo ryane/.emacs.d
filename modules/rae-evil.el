@@ -17,6 +17,7 @@
   "k" 'kill-buffer)
 
 ;; commenting
+(setq evilnc-hotkey-comment-operator "gc")
 (evilnc-default-hotkeys)
 
 ;; surround
