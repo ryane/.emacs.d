@@ -32,6 +32,7 @@
                       flx-ido
                       projectile
                       smartparens
+                      soap-client jira
                       flymake flymake-cursor flymake-shell
                       ruby-mode ruby-tools inf-ruby flymake-ruby rbenv)
   "A list of packages to ensure are installed at launch.")
