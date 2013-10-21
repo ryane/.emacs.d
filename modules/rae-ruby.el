@@ -6,7 +6,8 @@
 (add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
-(global-rbenv-mode)
+(unless (eq system-type 'windows-nt)
+  (global-rbenv-mode))
 
 ;; adapted from
 ;; http://ck.kennt-wayne.de/2013/may/emacs%3A-jump-to-matching-paren-beginning-of-block
