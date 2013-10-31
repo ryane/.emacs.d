@@ -31,7 +31,7 @@
                       color-theme-sanityinc-tomorrow
                       zenburn-theme
                       key-chord
-                      web-mode
+                      web-mode scss-mode
                       flx-ido
                       projectile
                       smartparens
