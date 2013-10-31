@@ -28,9 +28,6 @@
 
 ;; whitespace defaults
 (setq whitespace-line-column 80) ;; limit line length
-(setq whitespace-style
-      (quote (face tabs trailing lines space-before-tab
-                   indentation empty space-after-tab tab-mark)))
 
 ;; expand-region
 (require 'expand-region)
@@ -44,6 +41,9 @@
   "Default settings for all programming languages"
   (linum-mode)
   (smartparens-mode +1)
+  (setq whitespace-style
+        (quote (face tabs trailing lines space-before-tab
+                     indentation empty space-after-tab tab-mark)))
   (whitespace-mode +1))
 (add-hook 'prog-mode-hook 'rae-prog-mode-defaults)
 (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
@@ -51,6 +51,9 @@
 ;; text defaults
 (defun rae-text-mode-defaults ()
   "Default settings for text modes"
+  (setq whitespace-style
+        (quote (face tabs trailing space-before-tab
+                     indentation empty space-after-tab tab-mark)))
   (whitespace-mode +1))
 (add-hook 'text-mode-hook 'rae-text-mode-defaults)
 
