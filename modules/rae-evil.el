@@ -49,3 +49,46 @@
 (evil-add-hjkl-bindings magit-log-mode-map 'emacs)
 (evil-add-hjkl-bindings magit-commit-mode-map 'emacs)
 (evil-add-hjkl-bindings occur-mode 'emacs)
+(evil-add-hjkl-bindings term-raw-map 'normal
+  "p" 'term-paste)
+
+(evil-add-hjkl-bindings org-agenda-mode-map 'emacs
+  "H" 'org-agenda-holidays
+  "J" 'org-agenda-goto-date
+  "K" 'org-agenda-capture
+  "L" 'org-agenda-log-mode)
+
+;;; mu4e
+
+(eval-after-load 'mu4e
+  '(progn
+     ;; use the standard bindings as a base
+     (evil-make-overriding-map mu4e-view-mode-map 'normal t)
+     (evil-make-overriding-map mu4e-main-mode-map 'normal t)
+     (evil-make-overriding-map mu4e-headers-mode-map 'normal t)
+
+     (evil-add-hjkl-bindings mu4e-view-mode-map 'normal
+       "J" 'mu4e~headers-jump-to-maildir
+       "j" 'evil-next-line
+       "C" 'mu4e-compose-new
+       "o" 'mu4e-view-message
+       "Q" 'mu4e-raw-view-quit-buffer)
+
+     ;; (evil-add-hjkl-bindings mu4e-view-raw-mode-map 'normal
+     ;;   "J" 'mu4e-jump-to-maildir
+     ;;   "j" 'evil-next-line
+     ;;   "C" 'mu4e-compose-new
+     ;;   "q" 'mu4e-raw-view-quit-buffer)
+
+     (evil-add-hjkl-bindings mu4e-headers-mode-map 'normal
+       "J" 'mu4e~headers-jump-to-maildir
+       "j" 'evil-next-line
+       "C" 'mu4e-compose-new
+       "o" 'mu4e-headers-view-message
+       )
+
+     (evil-add-hjkl-bindings mu4e-main-mode-map 'normal
+       "J" 'mu4e~headers-jump-to-maildir
+       "j" 'evil-next-line
+       "RET" 'mu4e-view-message)
+     ))
