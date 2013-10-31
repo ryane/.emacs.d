@@ -34,3 +34,4 @@
   (flymake-cursor-mode)
   (rae-ruby-evil-overrides))
 (add-hook 'ruby-mode-hook 'rae-ruby-mode-defaults)
+(add-hook 'inferior-ruby-mode-hook 'ansi-color-for-comint-on)
