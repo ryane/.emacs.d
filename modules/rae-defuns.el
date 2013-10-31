@@ -24,3 +24,10 @@
        (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
 
 (define-key ctl-x-4-map (kbd "t") 'transpose-windows)
+
+
+;; sometimes I like to prune my buffer lists
+(defun rae-clean-buffer-list ()
+  (interactive)
+  (setq ido-virtual-buffers '())
+  (setq recentf-list '()))
