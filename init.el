@@ -18,6 +18,7 @@
 (defvar my-packages '(ido-ubiquitous
                       magit
                       markdown-mode
+                      multi-term
                       exec-path-from-shell
                       window-number
                       winner
