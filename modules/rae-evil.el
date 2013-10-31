@@ -34,9 +34,9 @@
 
 ;; use jk to exit insert mode
 ;; this has to be done after evil is turned on
-(setq key-chord-two-keys-delay 0.2)
-(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-(key-chord-mode 1)
+;; (setq key-chord-two-keys-delay 0.2)
+;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+;; (key-chord-mode 1)
 
 ;; Make HJKL keys work in special buffers
 (evil-add-hjkl-bindings magit-branch-manager-mode-map 'emacs
