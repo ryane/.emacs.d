@@ -27,3 +27,6 @@
 
 (when (memq window-system '(w32))
   (set-face-attribute 'default nil :font "Consolas-14"))
+
+;; shut the hell up
+(setq visible-bell t)
