@@ -47,13 +47,13 @@
 
 ;; pulled some colors from the tomorrow-night theme
 (setq org-todo-keyword-faces
-      (quote (("TODO" 'org-todo)
+      (quote (("TODO" org-todo)
               ("NEXT" :foreground "#8abeb7" :weight bold) ;; aqua
               ("PROG" :foreground "#de935f" :weight bold) ;; orange
               ("HOLD" :foreground "#b294bb" :weight bold) ;; comment
               ("WAIT" :foreground "#b294bb" :weight bold) ;; comment
-              ("DONE" 'org-done)
-              ("QUIT" 'org-done))))
+              ("DONE" org-done)
+              ("QUIT" org-done))))
 
 ;; todo state triggers
 (setq org-todo-state-tags-triggers
