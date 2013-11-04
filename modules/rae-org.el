@@ -22,6 +22,13 @@
 ;; add a timestamp when completing a todo
 (setq org-log-done 'time)
 
+;; clock settings
+(setq org-clock-into-drawer t)
+(setq org-clock-out-remove-zero-time-clocks t)
+(setq org-clock-idle-time 10)
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
 ;; agenda setup
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\.txt\\|org\\)\\'")
 (setq org-agenda-files (list "~/Dropbox/Documents/Organizer"))
