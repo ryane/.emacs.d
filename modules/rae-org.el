@@ -64,3 +64,76 @@
               ("TODO" ("WAIT") ("QUIT") ("HOLD"))
               ("NEXT" ("WAIT") ("QUIT") ("HOLD"))
               ("DONE" ("WAIT") ("QUIT") ("HOLD")))))
+
+;; org-capture
+(setq org-directory "~/Dropbox/Documents/Organizer")
+(setq org-default-notes-file "~/Dropbox/Documents/Organizer/inbox.org.txt")
+(setq org-capture-templates
+      (quote (("t" "todo" entry
+               (file 'org-default-notes-file)
+               "* TODO %?\n  %U\n  %a\n" :clock-in t :clock-resume t)
+
+              ("r" "respond" entry
+               (file 'org-default-notes-file)
+               "* NEXT Respond to email\nSCHEDULED: %t\n  %U\n  %a\n"
+               :clock-in t :clock-resume t :immediate-finish t)
+
+              ("n" "note" entry
+               (file 'org-default-notes-file)
+               "* %? :NOTE:\n  %U\n  %a\n" :clock-in t :clock-resume t)
+
+              ("j" "Journal" entry
+               (file+datetree "~/Dropbox/Documents/Organizer/diary.org.txt")
+               "* %?\n  %U\n" :clock-in t :clock-resume t)
+
+              ("w" "org-protocol" entry
+               (file 'org-default-notes-file)
+               "* TODO Review %c\n  %U\n" :immediate-finish t)
+
+              ("m" "Meeting" entry
+               (file 'org-default-notes-file)
+               "* MEET with %? :MEETING:\n  %U" :clock-in t :clock-resume t)
+
+              ("p" "Phone call" entry
+               (file 'org-default-notes-file)
+               "* CALL %? :CALL:\n  %U" :clock-in t :clock-resume t)
+
+              ("h" "Habit" entry
+               (file 'org-default-notes-file)
+               "* NEXT %?\n  %U\n  %a\n  SCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n  :PROPERTIES:\n  :STYLE: habit\n  :REPEAT_TO_STATE: NEXT\n  :END:\n"))))
+
+;;;; Refile settings
+;; refiling Targets include this file and any file contributing to the
+;; agenda - up to 9 levels deep
+(setq org-refile-targets (quote ((nil :maxlevel . 9)
+                                 (org-agenda-files :maxlevel . 9))))
+
+;; Use full outline paths for refile targets - we file directly with IDO
+(setq org-refile-use-outline-path t)
+
+;; Targets complete directly with IDO
+(setq org-outline-path-complete-in-steps nil)
+
+; Allow refile to create parent tasks with confirmation
+(setq org-refile-allow-creating-parent-nodes 'confirm)
+
+; Use IDO
+(setq org-completion-use-ido t)
+
+; Exclude DONE state tasks from refile targets
+(defun rae/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
+(setq org-refile-target-verify-function 'rae/verify-refile-target)
+
+
+;; Remove empty LOGBOOK drawers on clock out
+(defun rae/remove-empty-drawer-on-clock-out ()
+  (interactive)
+  (message "removing empty drawer on clock out")
+  (save-excursion
+    (beginning-of-line 0)
+    (org-remove-empty-drawer-at "LOGBOOK" (point))))
+
+(add-hook 'org-clock-out-hook 'rae/remove-empty-drawer-on-clock-out 'append)
