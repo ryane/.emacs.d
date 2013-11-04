@@ -32,6 +32,7 @@
 ;; agenda setup
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\.txt\\|org\\)\\'")
 (setq org-agenda-files (list "~/Dropbox/Documents/Organizer"))
+(setq org-agenda-restore-windows-after-quit t)
 
 ;; customize some keybindings
 ;; remove org-agenda file management bindings
