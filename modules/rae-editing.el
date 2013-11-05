@@ -137,3 +137,6 @@ The body of the advice is in BODY."
                  (switch-to-buffer other-window windmove-up windmove-down windmove-left windmove-right window-number-select)
                  (rae-auto-save-command))
 (add-hook 'mouse-leave-buffer-hook 'rae-auto-save-command)
+
+;; global auto-revert
+(global-auto-revert-mode t)
