@@ -17,9 +17,9 @@
 ;; Global bindings
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-l") 'goto-line) ;; formerly ignore downcase-word
-
 (global-set-key (kbd "<f8>") 'org-agenda)
 (global-set-key (kbd "<f9> m") 'rae-run-mu4e)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Font
 (when (memq window-system '(mac ns))
