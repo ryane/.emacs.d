@@ -17,9 +17,9 @@
 (setq-default ispell-program-name "aspell")
 (add-hook 'text-mode-hook 'flyspell-mode)
 
-;; auto-fill
-;; not sure I want auto-fill yet, I might want a soft-wrap mode
+;; wrapping
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
 ;; smart pairing for all
 (require 'smartparens-config)
