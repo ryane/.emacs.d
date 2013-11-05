@@ -58,6 +58,12 @@
   "K" 'org-agenda-capture
   "L" 'org-agenda-log-mode)
 
+(evil-add-hjkl-bindings ibuffer-mode-map 'emacs
+  "H" 'describe-mode
+  "J" 'ibuffer-jump-to-buffer
+  "K" 'ibuffer-do-kill-lines
+  "L" 'ibuffer-redisplay)
+
 ;;; mu4e
 
 (eval-after-load 'mu4e
