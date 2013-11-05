@@ -1,5 +1,17 @@
 ;; alot of this is borrowed from http://doc.norang.ca/org-mode.html
 
+;; additional modules
+(setq org-modules '(org-w3m
+                    org-bbdb
+                    org-bibtex
+                    org-docview
+                    org-gnus
+                    org-info
+                    org-irc
+                    org-mhe
+                    org-rmail
+                    org-drill))
+
 ;; i map these to fix M-<up> and M-<down> in org mode in the terminal
 ;; i wonder what else is broken. why can't emacs just work consistently
 ;; in the terminal and the gui. vim seems to do it much better
