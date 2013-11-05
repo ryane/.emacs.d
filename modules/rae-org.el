@@ -26,6 +26,7 @@
 (setq org-clock-into-drawer t)
 (setq org-clock-out-remove-zero-time-clocks t)
 (setq org-clock-idle-time 10)
+(setq org-clock-clocked-in-display 'both)
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 
