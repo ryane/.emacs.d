@@ -12,6 +12,12 @@
                     org-rmail
                     org-drill))
 
+(defun rae-org-mode-defaults ()
+  "Default settings for org-mode"
+  (visual-line-mode -1)
+  (auto-fill-mode 1))
+(add-hook 'org-mode-hook 'rae-org-mode-defaults)
+
 ;; i map these to fix M-<up> and M-<down> in org mode in the terminal
 ;; i wonder what else is broken. why can't emacs just work consistently
 ;; in the terminal and the gui. vim seems to do it much better
