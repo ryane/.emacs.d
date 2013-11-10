@@ -3,7 +3,7 @@
   (require 'org-mu4e)
 
   ;; default
-  (setq mu4e-maildir "~/Dropbox/Mail/Gmail")
+  (setq mu4e-maildir "~/Mail/Gmail")
 
   ;; this might need to be tweaked per os
   (setq mu4e-mu-binary "/usr/local/bin/mu")
