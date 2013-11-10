@@ -1,4 +1,5 @@
 ;; alot of this is borrowed from http://doc.norang.ca/org-mode.html
+(require 'rae-org-gtd)
 
 ;; additional modules
 (setq org-modules '(org-w3m
@@ -10,6 +11,7 @@
                     org-irc
                     org-mhe
                     org-rmail
+                    org-habit
                     org-drill))
 
 (defun rae-org-mode-defaults ()
@@ -87,39 +89,40 @@
 ;; org-capture
 (setq org-directory "~/Dropbox/Documents/Organizer")
 (setq org-default-notes-file "~/Dropbox/Documents/Organizer/inbox.org.txt")
+(setq org-default-archive-file "~/Dropbox/Documents/Organizer/archive.org.txt")
 (setq org-capture-templates
       (quote (("t" "todo" entry
                (file 'org-default-notes-file)
-               "* TODO %?\n  %U\n  %a\n" :clock-in t :clock-resume t)
+               "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
 
               ("r" "respond" entry
                (file 'org-default-notes-file)
-               "* NEXT Respond to email\nSCHEDULED: %t\n  %U\n  %a\n"
+               "* NEXT Respond to email\nSCHEDULED: %t\n%U\n%a\n"
                :clock-in t :clock-resume t :immediate-finish t)
 
               ("n" "note" entry
                (file 'org-default-notes-file)
-               "* %? :NOTE:\n  %U\n  %a\n" :clock-in t :clock-resume t)
+               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
 
               ("j" "Journal" entry
                (file+datetree "~/Dropbox/Documents/Organizer/diary.org.txt")
-               "* %?\n  %U\n" :clock-in t :clock-resume t)
+               "* %?\n%U\n%a\n" :clock-in t :clock-resume t)
 
               ("w" "org-protocol" entry
                (file 'org-default-notes-file)
-               "* TODO Review %c\n  %U\n" :immediate-finish t)
+               "* TODO Review %c\n%U\n" :immediate-finish t)
 
               ("m" "Meeting" entry
                (file 'org-default-notes-file)
-               "* MEET with %? :MEETING:\n  %U" :clock-in t :clock-resume t)
+               "* MEET with %? :MEETING:\n%U" :clock-in t :clock-resume t)
 
               ("p" "Phone call" entry
                (file 'org-default-notes-file)
-               "* CALL %? :CALL:\n  %U" :clock-in t :clock-resume t)
+               "* CALL %? :CALL:\n%U" :clock-in t :clock-resume t)
 
               ("h" "Habit" entry
                (file 'org-default-notes-file)
-               "* NEXT %?\n  %U\n  %a\n  SCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n  :PROPERTIES:\n  :STYLE: habit\n  :REPEAT_TO_STATE: NEXT\n  :END:\n"))))
+               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 
 ;;;; Refile settings
 ;; refiling Targets include this file and any file contributing to the
@@ -135,6 +138,9 @@
 
 ; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes 'confirm)
+
+
+;;;; Archive settings
 
 ; Use IDO
 (setq org-completion-use-ido t)
@@ -156,3 +162,108 @@
     (org-remove-empty-drawer-at (point))))
 
 (add-hook 'org-clock-out-hook 'rae/remove-empty-drawer-on-clock-out 'append)
+
+;;;; Custom Agenda
+
+;; ;; dim blocked tasks
+;; (setq org-agenda-dim-blocked-tasks t)
+
+;; ;; Compact the block agenda view
+;; (setq org-agenda-compact-blocks nil)
+
+;; just show me today by default
+(setq org-agenda-span 'day)
+
+;; disable default stuck tasks view
+(setq org-stuck-projects (quote ("" nil nil "")))
+
+;;;; Custom agenda command definitions
+(setq org-agenda-custom-commands
+      (quote (("N" "Notes" tags "NOTE"
+               ((org-agenda-overriding-header "Notes")
+                (org-tags-match-list-sublevels t)))
+              ("h" "Habits" tags-todo "STYLE=\"habit\""
+               ((org-agenda-overriding-header "Habits")
+                (org-agenda-sorting-strategy
+                 '(todo-state-down effort-up category-keep))))
+              (" " "Agenda"
+               ((agenda "" nil)
+                (tags "REFILE"
+                      ((org-agenda-overriding-header "Tasks to Refile")
+                       (org-tags-match-list-sublevels nil)))
+                (tags-todo "-QUIT/!"
+                           ((org-agenda-overriding-header "Stuck Projects")
+                            (org-agenda-skip-function 'bh/skip-non-stuck-projects)
+                            (org-agenda-sorting-strategy
+                             '(priority-down category-keep))))
+                (tags-todo "-HOLD-QUIT/!"
+                           ((org-agenda-overriding-header "Projects")
+                            (org-agenda-skip-function 'bh/skip-non-projects)
+                            (org-agenda-sorting-strategy
+                             '(priority-down category-keep))))
+                (tags-todo "-QUIT/!NEXT"
+                           ((org-agenda-overriding-header "Project Next Tasks")
+                            (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
+                            (org-tags-match-list-sublevels t)
+                            (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
+                            (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
+                            (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
+                            (org-agenda-sorting-strategy
+                             '(priority-down todo-state-down effort-up category-keep))))
+                (tags-todo "-REFILE-QUIT-WAIT/!"
+                           ((org-agenda-overriding-header (if (marker-buffer org-agenda-restrict-begin) "Project Subtasks" "Standalone Tasks"))
+                            (org-agenda-skip-function 'bh/skip-project-tasks-maybe)
+                            (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
+                            (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
+                            (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
+                            (org-agenda-sorting-strategy
+                             '(category-keep))))
+                (tags-todo "-QUIT+WAIT/!"
+                           ((org-agenda-overriding-header "Waiting and Postponed Tasks")
+                            (org-agenda-skip-function 'bh/skip-stuck-projects)
+                            (org-tags-match-list-sublevels nil)
+                            (org-agenda-todo-ignore-scheduled 'future)
+                            (org-agenda-todo-ignore-deadlines 'future)))
+                (tags "-REFILE/"
+                      ((org-agenda-overriding-header "Tasks to Archive")
+                       (org-agenda-skip-function 'bh/skip-non-archivable-tasks)
+                       (org-tags-match-list-sublevels nil))))
+               nil)
+              ("r" "Tasks to Refile" tags "REFILE"
+               ((org-agenda-overriding-header "Tasks to Refile")
+                (org-tags-match-list-sublevels nil)))
+              ("#" "Stuck Projects" tags-todo "-QUIT/!"
+               ((org-agenda-overriding-header "Stuck Projects")
+                (org-agenda-skip-function 'bh/skip-non-stuck-projects)))
+              ("n" "Next Tasks" tags-todo "-WAIT-QUIT/!NEXT"
+               ((org-agenda-overriding-header "Next Tasks")
+                (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
+                (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
+                (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
+                (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
+                (org-tags-match-list-sublevels t)
+                (org-agenda-sorting-strategy
+                 '(todo-state-down effort-up category-keep))))
+              ("R" "Tasks" tags-todo "-REFILE-QUIT/!-HOLD-WAIT"
+               ((org-agenda-overriding-header "Tasks")
+                (org-agenda-skip-function 'bh/skip-project-tasks-maybe)
+                (org-agenda-sorting-strategy
+                 '(category-keep))))
+              ("p" "Projects" tags-todo "-HOLD-QUIT/!"
+               ((org-agenda-overriding-header "Projects")
+                (org-agenda-skip-function 'bh/skip-non-projects)
+                (org-agenda-sorting-strategy
+                 '(category-keep))))
+              ("w" "Waiting Tasks" tags-todo "-QUIT+WAIT/!"
+               ((org-agenda-overriding-header "Waiting and Postponed tasks"))
+               (org-tags-match-list-sublevels nil))
+              ("A" "Tasks to Archive" tags "-REFILE/"
+               ((org-agenda-overriding-header "Tasks to Archive")
+                (org-agenda-skip-function 'bh/skip-non-archivable-tasks)
+                (org-tags-match-list-sublevels nil))))))
+
+;;;; drilling
+(setq org-drill-scope 'agenda)
+
+;;;; exporting
+(setq org-export-backends '(ascii html icalendar latex md))
