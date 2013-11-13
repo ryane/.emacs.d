@@ -61,6 +61,7 @@
 ;; add to load path
 (add-to-list 'load-path (concat vendor-dir "org-mode/lisp/"))
 (add-to-list 'load-path (concat vendor-dir "org-mode/contrib/lisp/") t)
+(add-to-list 'load-path (concat vendor-dir "org-pomodoro/") t)
 (add-to-list 'load-path vendor-dir)
 (add-to-list 'load-path module-dir)
 
