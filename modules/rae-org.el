@@ -12,7 +12,9 @@
                     org-mhe
                     org-rmail
                     org-habit
-                    org-drill))
+                    org-drill
+                    org-timer
+                    org-checklist))
 
 (defun rae-org-mode-defaults ()
   "Default settings for org-mode"
@@ -39,16 +41,48 @@
 ;; make sure a parent task can't be completed if it has active subtasks
 (setq org-enforce-todo-dependencies t)
 
+;; a warning of 14d is too much for me
+(setq org-deadline-warning-days 7)
+
 ;; add a timestamp when completing a todo
 (setq org-log-done 'time)
+;; log into drawers
+(setq org-log-into-drawer t)
+(setq org-log-state-notes-insert-after-drawers nil)
 
 ;; clock settings
-(setq org-clock-into-drawer t)
-(setq org-clock-out-remove-zero-time-clocks t)
-(setq org-clock-idle-time 10)
-(setq org-clock-clocked-in-display 'both)
-(setq org-clock-persist 'history)
+
+;; Resume clocking task when emacs is restarted
 (org-clock-persistence-insinuate)
+;; Show lot of clocking history
+(setq org-clock-history-length 23)
+;; Resume clocking task on clock-in if the clock is open
+(setq org-clock-in-resume t)
+;; Change tasks to NEXT when clocking in
+(setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
+;; Save clock data and state changes and notes in the LOGBOOK drawer
+(setq org-clock-into-drawer t)
+;; Sometimes I change tasks I'm clocking quickly - this removes
+;; clocked tasks with 0:00 duration
+(setq org-clock-out-remove-zero-time-clocks t)
+;; Clock out when moving task to a done state
+(setq org-clock-out-when-done t)
+;; Save the running clock and all clock history when exiting Emacs,
+;; load it on startup
+(setq org-clock-persist t)
+;; Do not prompt to resume an active clock
+(setq org-clock-persist-query-resume nil)
+;; Enable auto clock resolution for finding open clocks
+(setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+;; Include current clocking task in clock reports
+(setq org-clock-report-include-clocking-task t)
+;; idle time is 10 minutes
+(setq org-clock-idle-time 10)
+;; display the clock in the mode line and frame title
+(setq org-clock-clocked-in-display 'both)
+
+;; use the norang clocking system
+(add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
 
 ;; agenda setup
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\.txt\\|org\\)\\'")
@@ -89,7 +123,7 @@
 ;; org-capture
 (setq org-directory "~/Dropbox/Documents/Organizer")
 (setq org-default-notes-file "~/Dropbox/Documents/Organizer/inbox.org.txt")
-(setq org-default-archive-file "~/Dropbox/Documents/Organizer/archive.org.txt")
+(setq org-agenda-diary-file "~/Dropbox/Documents/Organizer/diary.org.txt")
 (setq org-capture-templates
       (quote (("t" "todo" entry
                (file 'org-default-notes-file)
@@ -122,7 +156,32 @@
 
               ("h" "Habit" entry
                (file 'org-default-notes-file)
-               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+               "* NEXT %?\n%U\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+
+;;;; Tag settings
+;; Tags with fast selection keys
+(setq org-tag-alist (quote ((:startgroup)
+                            ("@errand" . ?e)
+                            ("@office" . ?o)
+                            ("@home" . ?h)
+                            ("@computer" . ?c)
+                            ("@anywhere" . ?a)
+                            (:endgroup)
+                            ("WAIT" . ?W)
+                            ("HOLD" . ?H)
+                            ("PERSONAL" . ?p)
+                            ("WORK" . ?w)
+                            ("ORG" . ?O)
+                            ("NOTE" . ?n)
+                            ("QUIT" . ?q)
+                            ("FLAGGED" . ??)
+                            )))
+
+;; Allow setting single tags without the menu
+;; (setq org-fast-tag-selection-single-key (quote expert))
+
+;; For tag searches ignore tasks with scheduled and deadline dates
+;; (setq org-agenda-tags-todo-honor-ignore-options t)
 
 ;;;; Refile settings
 ;; refiling Targets include this file and any file contributing to the
@@ -139,9 +198,6 @@
 ; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 
-
-;;;; Archive settings
-
 ; Use IDO
 (setq org-completion-use-ido t)
 
@@ -151,7 +207,6 @@
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 
 (setq org-refile-target-verify-function 'rae/verify-refile-target)
-
 
 ;; Remove empty LOGBOOK drawers on clock out
 (defun rae/remove-empty-drawer-on-clock-out ()
@@ -163,16 +218,89 @@
 
 (add-hook 'org-clock-out-hook 'rae/remove-empty-drawer-on-clock-out 'append)
 
+;;;; effort estimation
+;; Set default column view headings: Task Effort Clock_Summary
+; global Effort estimate values
+; global STYLE property values for completion
+(setq org-global-properties
+      (quote (
+              ("Effort_ALL" . "0:15 0:25 0:30 0:45 1:00 2:00 3:00 4:00 0:00")
+              ("STYLE_ALL" . "habit"))))
+(setq org-columns-default-format
+      "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
+
 ;;;; Custom Agenda
 
-;; ;; dim blocked tasks
-;; (setq org-agenda-dim-blocked-tasks t)
+;; Agenda log mode items to display (closed and state changes by default)
+(setq org-agenda-log-mode-items (quote (closed state)))
 
-;; ;; Compact the block agenda view
-;; (setq org-agenda-compact-blocks nil)
+;; dim blocked tasks
+(setq org-agenda-dim-blocked-tasks t)
+
+;; don't compact the block agenda view
+(setq org-agenda-compact-blocks nil)
 
 ;; just show me today by default
 (setq org-agenda-span 'day)
+
+;; Keep tasks with dates on the global todo lists
+(setq org-agenda-todo-ignore-with-date nil)
+
+;; Keep tasks with deadlines on the global todo lists
+(setq org-agenda-todo-ignore-deadlines nil)
+
+;; Keep tasks with scheduled dates on the global todo lists
+(setq org-agenda-todo-ignore-scheduled nil)
+
+;; Keep tasks with timestamps on the global todo lists
+(setq org-agenda-todo-ignore-timestamp nil)
+
+;; Remove completed deadline tasks from the agenda view
+(setq org-agenda-skip-deadline-if-done t)
+
+;; Remove completed scheduled tasks from the agenda view
+(setq org-agenda-skip-scheduled-if-done t)
+
+;; Remove completed items from search results
+(setq org-agenda-skip-timestamp-if-done t)
+
+;; diary settings
+(setq org-agenda-include-diary nil)
+(setq org-agenda-insert-diary-extract-time t)
+
+;; Include agenda archive files when searching for things
+(setq org-agenda-text-search-extra-files (quote (agenda-archives)))
+
+;; Show all future entries for repeating tasks
+(setq org-agenda-repeating-timestamp-show-all t)
+
+;; Show all agenda dates - even if they are empty
+(setq org-agenda-show-all-dates t)
+
+;; Use sticky agenda's so they persist
+(setq org-agenda-sticky t)
+(add-hook 'org-agenda-mode-hook
+          (lambda ()
+            (define-key org-agenda-mode-map "q" 'bury-buffer))
+          'append)
+
+;; Sorting order for tasks on the agenda
+(setq org-agenda-sorting-strategy
+      (quote ((agenda habit-down time-up user-defined-up priority-down effort-up category-keep)
+              (todo category-up priority-down effort-up)
+              (tags category-up priority-down effort-up)
+              (search category-up))))
+
+;; Start the weekly agenda on Monday
+(setq org-agenda-start-on-weekday 1)
+
+;; Enable display of the time grid so we can see the marker for the current time
+;; (setq org-agenda-time-grid (quote ((daily today remove-match)
+;;                                    #("----------------" 0 16 (org-heading t))
+;;                                    (0900 1100 1300 1500 1700))))
+
+;; Display tags farther right
+;; (setq org-agenda-tags-column -102)
 
 ;; disable default stuck tasks view
 (setq org-stuck-projects (quote ("" nil nil "")))
@@ -267,3 +395,132 @@
 
 ;;;; exporting
 (setq org-export-backends '(ascii html icalendar latex md))
+
+;;;; Archive settings
+(setq org-archive-mark-done nil)
+(setq org-archive-location "%s_archive::* Archived Tasks")
+
+;;;; Reminders
+
+;; Rebuild the reminders everytime the agenda is displayed
+(add-hook 'org-finalize-agenda-hook 'bh/org-agenda-to-appt 'append)
+
+;; This is at the end of my .emacs - so appointments are set up when
+;; Emacs starts
+(bh/org-agenda-to-appt)
+
+;; Activate appointments so we get notifications
+(appt-activate t)
+
+;; If we leave Emacs running overnight - reset the appointments one
+;; minute after midnight
+(run-at-time "24:01" nil 'bh/org-agenda-to-appt)
+
+;; integrate with osx notification center
+;; http://thread.gmane.org/gmane.emacs.orgmode/5664/focus=5806
+(when (eq system-type 'darwin)
+  (defun rae/appt-disp-window (min-to-app new-time msg)
+    (or (listp min-to-app)
+        (setq msg (list msg)))
+    (save-window-excursion
+      (dotimes (i (length msg))
+        (shell-command
+         (concat
+          "/usr/bin/automator -D Title=\"Appointment Reminder\" -D Message=\""
+          (nth i msg)
+          "\" "
+          "~/Scripts/DisplayNotification.workflow"
+          ) nil nil))))
+
+  (defun rae/appt-delete-window ()
+    (if appt-audible
+        (beep 1)))
+
+  (setq appt-disp-window-function (function rae/appt-disp-window)))
+  (setq appt-delete-window-function (function rae/appt-delete-window))
+
+;;;; focusing on current work
+(add-hook 'org-agenda-mode-hook
+          '(lambda ()
+             (org-defkey org-agenda-mode-map "W" 'bh/widen))
+          'append)
+(add-hook 'org-agenda-mode-hook
+          '(lambda ()
+             (org-defkey org-agenda-mode-map "F"
+                         'bh/restrict-to-file-or-follow))
+          'append)
+(add-hook 'org-agenda-mode-hook
+          '(lambda ()
+             (org-defkey org-agenda-mode-map "N" 'bh/narrow-to-subtree))
+          'append)
+(add-hook 'org-agenda-mode-hook
+          '(lambda ()
+             (org-defkey org-agenda-mode-map "U" 'bh/narrow-up-one-level))
+          'append)
+(add-hook 'org-agenda-mode-hook
+          '(lambda ()
+             (org-defkey org-agenda-mode-map "P" 'bh/narrow-to-project))
+          'append)
+(add-hook 'org-agenda-mode-hook
+          '(lambda ()
+             (org-defkey org-agenda-mode-map "V" 'bh/view-next-project))
+          'append)
+(add-hook 'org-agenda-mode-hook
+          '(lambda ()
+             (org-defkey org-agenda-mode-map "\C-c\C-x<"
+                         'bh/set-agenda-restriction-lock))
+          'append)
+
+(setq org-hide-leading-stars nil)
+
+(setq org-startup-indented t)
+
+(setq org-cycle-separator-lines 0)
+
+(setq org-blank-before-new-entry (quote ((heading)
+                                         (plain-list-item . auto))))
+
+(setq org-insert-heading-respect-content nil)
+
+(setq org-reverse-note-order nil)
+
+(setq org-show-following-heading t)
+(setq org-show-hierarchy-above t)
+(setq org-show-siblings (quote ((default))))
+
+(setq org-special-ctrl-a/e t)
+(setq org-special-ctrl-k t)
+(setq org-yank-adjusted-subtrees t)
+
+; position the habit graph on the agenda to the right of the default
+(setq org-habit-graph-column 50)
+
+(run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
+
+;; pomodoro setup
+;; (setq org-timer-default-timer 25)
+;; (setq org-timer-display 'both)
+;; (add-hook 'org-clock-in-hook '(lambda ()
+;;       (if (not org-timer-current-timer)
+;;       (org-timer-set-timer '(16)))))
+;; (add-hook 'org-clock-in-hook 'rae/pomodoro-reset)
+
+;; (setq rae/pomodooro-break-running nil)
+;; (defun rae/pomodoro-reset ()
+;;   (interactive)
+;;   (if rae/pomodooro-break-running
+;;       (rae/pomodoro-start)
+;;     (rae/pomodoro-break-start)))
+
+;; (add-hook 'org-timer-done-hook 'rae/pomodoro-reset)
+
+;; (defun rae/pomodoro-break-start ()
+;;   (setq rae/pomodooro-break-running t)
+;;   (if (not org-timer-current-timer)
+;;       (org-timer-set-timer 5))
+;;     (org-capture nil "j"))
+
+;; (defun rae/pomodoro-start ()
+;;   (setq rae/pomodooro-break-running nil)
+;;   (if (not org-timer-current-timer)
+;;       (org-timer-set-timer '(16))))
