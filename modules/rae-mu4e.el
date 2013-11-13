@@ -29,7 +29,7 @@
            ("/Trash"   . ?t)))
 
   ;; allow for updating mail using 'U' in the main view:
-  ;; (setq mu4e-get-mail-command "offlineimap")
+  (setq mu4e-get-mail-command "offlineimap -f INBOX")
   (setq mu4e-update-interval 300)
   (add-hook 'mu4e-index-updated-hook
             (defun mu4e-index-updated-notifcation ()
