@@ -1,3 +1,5 @@
+;; (require 'evil-org)
+
 (setq evil-want-C-u-scroll t)
 
 ;; Originally C-z but I like to suspend emacs
@@ -53,10 +55,9 @@
   "p" 'term-paste)
 
 (evil-add-hjkl-bindings org-agenda-mode-map 'emacs
-  "H" 'org-agenda-holidays
-  "J" 'org-agenda-goto-date
-  "K" 'org-agenda-capture
-  "L" 'org-agenda-log-mode)
+  "Y" 'org-agenda-goto-date
+  "Z" 'org-agenda-capture
+  "l" 'org-agenda-log-mode)
 
 (evil-add-hjkl-bindings ibuffer-mode-map 'emacs
   "H" 'describe-mode
