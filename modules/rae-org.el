@@ -497,30 +497,17 @@
 
 (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
 
-;; pomodoro setup
-;; (setq org-timer-default-timer 25)
-;; (setq org-timer-display 'both)
-;; (add-hook 'org-clock-in-hook '(lambda ()
-;;       (if (not org-timer-current-timer)
-;;       (org-timer-set-timer '(16)))))
-;; (add-hook 'org-clock-in-hook 'rae/pomodoro-reset)
+;;;; pomodoro setup
+(require 'org-pomodoro)
+(defun rae/org-pomodoro-start-maybe ()
+  (if (equal org-pomodoro-state :none)
+      (org-pomodoro)))
 
-;; (setq rae/pomodooro-break-running nil)
-;; (defun rae/pomodoro-reset ()
-;;   (interactive)
-;;   (if rae/pomodooro-break-running
-;;       (rae/pomodoro-start)
-;;     (rae/pomodoro-break-start)))
+;; capture a note when the pomodoro is finished
+(add-hook 'org-pomodoro-finished-hook '(lambda ()
+                                         (org-capture nil "j")))
 
-;; (add-hook 'org-timer-done-hook 'rae/pomodoro-reset)
-
-;; (defun rae/pomodoro-break-start ()
-;;   (setq rae/pomodooro-break-running t)
-;;   (if (not org-timer-current-timer)
-;;       (org-timer-set-timer 5))
-;;     (org-capture nil "j"))
-
-;; (defun rae/pomodoro-start ()
-;;   (setq rae/pomodooro-break-running nil)
-;;   (if (not org-timer-current-timer)
-;;       (org-timer-set-timer '(16))))
+;; restart the pomodoro when breaks are finished or you clock in a task
+(add-hook 'org-clock-in-hook 'rae/org-pomodoro-start-maybe)
+(add-hook 'org-pomodoro-short-break-finished-hook 'rae/org-pomodoro-start-maybe)
+(add-hook 'org-pomodoro-long-break-finished-hook 'rae/org-pomodoro-start-maybe)
