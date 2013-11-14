@@ -28,6 +28,14 @@
            ("/Flagged" . ?f)
            ("/Trash"   . ?t)))
 
+  (setq mu4e-bookmarks
+        '(
+          ("flag:unread AND NOT flag:trashed AND NOT maildir:\"/Spam\""
+           "Unread messages" ?u)
+          ("date:today..now"                  "Today's messages"     ?t)
+          ("date:7d..now"                     "Last 7 days"          ?w)
+          ("mime:image/*"                     "Messages with images" ?p)))
+
   ;; allow for updating mail using 'U' in the main view:
   (setq mu4e-get-mail-command "offlineimap -f INBOX")
   (setq mu4e-update-interval 300)
