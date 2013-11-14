@@ -499,6 +499,9 @@
 
 ;;;; pomodoro setup
 (require 'org-pomodoro)
+
+(setq org-pomodoro-format "~%s")
+(setq org-pomodoro-clock-out-when-finished nil)
 (defun rae/org-pomodoro-start-maybe ()
   (if (equal org-pomodoro-state :none)
       (org-pomodoro)))
