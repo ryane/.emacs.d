@@ -41,6 +41,7 @@
   "Default settings for all programming languages"
   (linum-mode)
   (smartparens-mode +1)
+  (flyspell-prog-mode)
   (setq whitespace-style
         (quote (face tabs trailing lines space-before-tab
                      indentation empty space-after-tab tab-mark)))
