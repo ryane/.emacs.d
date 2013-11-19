@@ -16,7 +16,13 @@
   "b" 'switch-to-buffer
   "," 'mode-line-other-buffer
   "f" 'ag
-  "k" 'kill-buffer)
+  "g" 'magit-status
+  "a" 'rspec-toggle-spec-and-target
+  "t" 'rspec-rerun
+  "v" 'rspec-verify
+  "V" 'rspec-verify-single
+  "k" 'kill-buffer
+  "SPC" 'ace-jump-mode)
 
 ;; commenting
 (setq evilnc-hotkey-comment-operator "gc")
