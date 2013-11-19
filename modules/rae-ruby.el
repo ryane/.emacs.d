@@ -35,3 +35,6 @@
   (rae-ruby-evil-overrides))
 (add-hook 'ruby-mode-hook 'rae-ruby-mode-defaults)
 (add-hook 'inferior-ruby-mode-hook 'ansi-color-for-comint-on)
+
+;; rspec-mode
+(setq rspec-use-rake-when-possible nil)
