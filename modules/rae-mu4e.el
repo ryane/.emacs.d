@@ -30,8 +30,14 @@
 
   (setq mu4e-bookmarks
         '(
+          ;; ("flag:unread AND NOT flag:trashed AND NOT list:* AND NOT maildir:\"/Spam\""
+          ;;  "Unread messages, no lists" ?u)
           ("flag:unread AND NOT flag:trashed AND NOT maildir:\"/Spam\""
-           "Unread messages" ?u)
+           "All unread messages" ?u)
+          ("flag:unread AND list:emacs-orgmode.gnu.org"
+           "Unread org-mode list" ?o)
+          ("flag:unread AND list:30x500-alumni.googlegroups.com"
+           "Unread 30x500 list" ?3)
           ("date:today..now"                  "Today's messages"     ?t)
           ("date:7d..now"                     "Last 7 days"          ?w)
           ("mime:image/*"                     "Messages with images" ?p)))
