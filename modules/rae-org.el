@@ -489,6 +489,10 @@
           'append)
 (add-hook 'org-agenda-mode-hook
           '(lambda ()
+             (org-defkey org-agenda-mode-map "(" 'org-pomodoro))
+          'append)
+(add-hook 'org-agenda-mode-hook
+          '(lambda ()
              (org-defkey org-agenda-mode-map "\C-c\C-x<"
                          'bh/set-agenda-restriction-lock))
           'append)
@@ -533,6 +537,6 @@
                                          (org-capture nil "j")))
 
 ;; restart the pomodoro when breaks are finished or you clock in a task
-(add-hook 'org-clock-in-hook 'rae/org-pomodoro-start-maybe)
-(add-hook 'org-pomodoro-short-break-finished-hook 'rae/org-pomodoro-start-maybe)
-(add-hook 'org-pomodoro-long-break-finished-hook 'rae/org-pomodoro-start-maybe)
+;; (add-hook 'org-clock-in-hook 'rae/org-pomodoro-start-maybe)
+;; (add-hook 'org-pomodoro-short-break-finished-hook 'rae/org-pomodoro-start-maybe)
+;; (add-hook 'org-pomodoro-long-break-finished-hook 'rae/org-pomodoro-start-maybe)
