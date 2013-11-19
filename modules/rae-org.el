@@ -88,6 +88,7 @@
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\.txt\\|org\\)\\'")
 (setq org-agenda-files (list "~/Dropbox/Documents/Organizer"))
 (setq org-agenda-restore-windows-after-quit t)
+(setq org-agenda-window-setup 'current-window)
 
 ;; customize some keybindings
 ;; remove org-agenda file management bindings
