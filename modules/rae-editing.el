@@ -77,6 +77,8 @@
 (setq recentf-save-file (expand-file-name "recentf" save-dir)
       recentf-max-saved-items 500
       recentf-max-menu-items 15)
+(setq recentf-keep '(file-remote-p file-readable-p))
+;; (setq recentf-auto-cleanup 'never)
 (recentf-mode +1)
 
 ;; use shift + arrow keys to switch between visible buffers
