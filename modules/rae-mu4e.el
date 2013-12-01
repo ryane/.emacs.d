@@ -1,6 +1,7 @@
 (unless (eq window-system 'w32) ;; this should probably be system-type
   (require 'mu4e)
   (require 'org-mu4e)
+  (require 'mu4e-contrib)
 
   ;; default
   (setq mu4e-maildir "~/Mail/Gmail")
@@ -30,21 +31,26 @@
 
   (setq mu4e-bookmarks
         '(
-          ;; ("flag:unread AND NOT flag:trashed AND NOT list:* AND NOT maildir:\"/Spam\""
-          ;;  "Unread messages, no lists" ?u)
+          ("flag:unread AND NOT flag:trashed AND NOT list:* AND NOT maildir:\"/Spam\""
+           "Unread messages, no lists" ?U)
           ("flag:unread AND NOT flag:trashed AND NOT maildir:\"/Spam\""
            "All unread messages" ?u)
           ("flag:unread AND list:emacs-orgmode.gnu.org"
            "Unread org-mode list" ?o)
           ("flag:unread AND list:30x500-alumni.googlegroups.com"
            "Unread 30x500 list" ?3)
+          ("flag:unread AND list:newworkcity.googlegroups.com"
+           "Unread NWC list" ?n)
+          ("from:jira@mamajamas.atlassian.net"
+           "Mamajamas JIRA Issues" ?j)
+          ("flag:unread AND list:*"           "Unread lists" ?l)
           ("date:today..now"                  "Today's messages"     ?t)
           ("date:7d..now"                     "Last 7 days"          ?w)
           ("mime:image/*"                     "Messages with images" ?p)))
 
   ;; allow for updating mail using 'U' in the main view:
   (setq mu4e-get-mail-command "offlineimap -f INBOX")
-  (setq mu4e-update-interval 300)
+  (setq mu4e-update-interval 1200)
   (add-hook 'mu4e-index-updated-hook
             (defun mu4e-index-updated-notifcation ()
               (message "New mail arrived.")))
@@ -149,3 +155,16 @@
     (make-frame-command)
     (mu4e))
   )
+
+(defun mu4e-headers-mark-all-delete ()
+  "Put a D \(delete) mark on all visible messages."
+  (interactive)
+  (mu4e-headers-mark-for-each-if
+   (cons 'delete nil)
+   (lambda (msg param) t)))
+
+(defun mu4e-headers-delete-all ()
+  "Delete all visible messages."
+  (interactive)
+  (mu4e-headers-mark-all-delete)
+  (mu4e-mark-execute-all t))
