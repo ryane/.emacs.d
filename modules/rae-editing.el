@@ -14,7 +14,9 @@
       `((".*" ,temporary-file-directory t)))
 
 ;; spell-checking
-(setq-default ispell-program-name "aspell")
+(if (memq window-system '(w32))
+    (setq-default ispell-program-name "aspell")
+  (setq-default ispell-program-name "/usr/local/bin/aspell"))
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; wrapping
