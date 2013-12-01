@@ -85,8 +85,14 @@
 (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
 
 ;; agenda setup
+(if (memq window-system '(w32))
+    (setq rae-home-dir "C:/Users/ryan")
+  (setq rae-home-dir (expand-file-name "~")))
+
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\.txt\\|org\\)\\'")
-(setq org-agenda-files (list "~/Dropbox/Documents/Organizer"))
+(setq org-agenda-files
+      (list
+       (concat rae-home-dir "/Dropbox/Documents/Organizer")))
 (setq org-agenda-restore-windows-after-quit t)
 (setq org-agenda-window-setup 'current-window)
 
@@ -122,9 +128,11 @@
               ("DONE" ("WAIT") ("QUIT") ("HOLD")))))
 
 ;; org-capture
-(setq org-directory "~/Dropbox/Documents/Organizer")
-(setq org-default-notes-file "~/Dropbox/Documents/Organizer/inbox.org.txt")
-(setq org-agenda-diary-file "~/Dropbox/Documents/Organizer/diary.org.txt")
+(setq org-directory (concat rae-home-dir "/Dropbox/Documents/Organizer"))
+(setq org-default-notes-file
+      (concat rae-home-dir "/Dropbox/Documents/Organizer/inbox.org.txt"))
+(setq org-agenda-diary-file
+      (concat rae-home-dir "/Dropbox/Documents/Organizer/diary.org.txt"))
 (setq org-capture-templates
       (quote (("t" "todo" entry
                (file 'org-default-notes-file)
@@ -140,7 +148,9 @@
                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
 
               ("j" "Journal" entry
-               (file+datetree "~/Dropbox/Documents/Organizer/diary.org.txt")
+               (file+datetree
+                (concat rae-home-dir
+                 "/Dropbox/Documents/Organizer/diary.org.txt"))
                "* %?\n%U\n%a\n" :clock-in t :clock-resume t)
 
               ("w" "org-protocol" entry
@@ -204,8 +214,8 @@
 ;;;; Refile settings
 ;; refiling Targets include this file and any file contributing to the
 ;; agenda - up to 9 levels deep
-(setq org-refile-targets (quote ((nil :maxlevel . 9)
-                                 (org-agenda-files :maxlevel . 9))))
+(setq org-refile-targets (quote ((nil :maxlevel . 2)
+                                 (org-agenda-files :maxlevel . 2))))
 
 ;; Use full outline paths for refile targets - we file directly with IDO
 (setq org-refile-use-outline-path t)
@@ -451,7 +461,7 @@
           "/usr/bin/automator -D Title=\"Appointment Reminder\" -D Message=\""
           (nth i msg)
           "\" "
-          "~/Scripts/DisplayNotification.workflow"
+          (expand-file-name "~/Scripts/DisplayNotification.workflow")
           ) nil nil))))
 
   (defun rae/appt-delete-window ()
