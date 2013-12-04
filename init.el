@@ -37,6 +37,7 @@
                       flx-ido
                       projectile
                       smartparens
+                      helm helm-projectile
                       soap-client jira
                       flymake flymake-cursor flymake-shell
                       ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
