@@ -31,6 +31,18 @@
 ;; whitespace defaults
 (setq whitespace-line-column 80) ;; limit line length
 
+;; cleanup whitespace
+(defcustom rae-clean-whitespace-on-save t
+  "Cleanup whitespace from file before it's saved.
+Will only occur if prelude-whitespace is also enabled."
+  :type 'boolean
+  :group 'prelude)
+(defun rae-cleanup-maybe ()
+  "Invoke `whitespace-cleanup' if `rae-clean-whitespace-on-save' is not nil."
+  (when rae-clean-whitespace-on-save
+    (whitespace-cleanup)))
+
+
 ;; expand-region
 (require 'expand-region)
 (require 'ruby-mode-expansions)
@@ -47,7 +59,8 @@
   (setq whitespace-style
         (quote (face tabs trailing lines space-before-tab
                      indentation empty space-after-tab tab-mark)))
-  (whitespace-mode +1))
+  (whitespace-mode +1)
+  (add-hook 'before-save-hook 'rae-cleanup-maybe nil t))
 (add-hook 'prog-mode-hook 'rae-prog-mode-defaults)
 (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
 
@@ -57,7 +70,8 @@
   (setq whitespace-style
         (quote (face tabs trailing space-before-tab
                      indentation empty space-after-tab tab-mark)))
-  (whitespace-mode +1))
+  (whitespace-mode +1)
+  (add-hook 'before-save-hook 'rae-cleanup-maybe nil t))
 (add-hook 'text-mode-hook 'rae-text-mode-defaults)
 
 ;; uniq buffer names
