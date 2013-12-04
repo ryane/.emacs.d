@@ -153,6 +153,18 @@
                  "/Dropbox/Documents/Organizer/diary.org.txt"))
                "* %?\n%U\n%a\n" :clock-in t :clock-resume t)
 
+              ("e" "Event" entry
+               (file+datetree
+                (concat rae-home-dir
+                 "/Dropbox/Documents/Organizer/diary.org.txt"))
+               "* %?\n:PROPERTIES:\n:CATEGORY: event\n:END:\n%T\n%a\n" :clock-in t :clock-resume t)
+
+              ("d" "Daily Outcomes" entry
+               (file+datetree
+                (concat rae-home-dir
+                 "/Dropbox/Documents/Organizer/daily_review.org.txt"))
+               "* TODO %?\n%t\n%a\n" :clock-in t :clock-resume t)
+
               ("w" "org-protocol" entry
                (file 'org-default-notes-file)
                "* TODO Review %c\n%U\n" :immediate-finish t)
