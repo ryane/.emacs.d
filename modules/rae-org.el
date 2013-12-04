@@ -206,6 +206,7 @@
                             ("READING" . nil)
                             (:startgroup)
                             ("TOREAD" . nil)
+                            ("TOBUY" . nil)
                             ("READ" . nil)
                             (:endgroup)
                             ("FOOD" . nil)
