@@ -40,6 +40,7 @@
                       helm helm-projectile
                       soap-client jira
                       flymake flymake-cursor flymake-shell
+                      clojure-mode clojure-test-mode
                       ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
                       rspec-mode)
   "A list of packages to ensure are installed at launch.")
