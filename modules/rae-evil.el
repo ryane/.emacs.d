@@ -22,7 +22,9 @@
   "v" 'rspec-verify
   "V" 'rspec-verify-single
   "k" 'kill-buffer
-  "SPC" 'ace-jump-mode)
+  "SPC" 'ace-jump-mode
+  "m" 'ace-jump-char-mode
+  "." 'projectile-find-file)
 
 ;; commenting
 (setq evilnc-hotkey-comment-operator "gc")
