@@ -44,3 +44,7 @@
 
 ;; shut the hell up
 (setq visible-bell t)
+
+;; don't use osx native fullscreen
+(setq ns-use-native-fullscreen nil)
+(global-set-key (kbd "<f6>") 'toggle-frame-fullscreen)
