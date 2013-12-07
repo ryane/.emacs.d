@@ -59,6 +59,11 @@
 (defvar save-dir (concat emacs-dir "savefile/")
   "Stores automatically generated save/history files")
 
+;; organizer directory
+(if (memq window-system '(w32))
+    (setq rae-org-dir "C:/Users/ryan")
+  (setq rae-org-dir (expand-file-name "~")))
+
 (unless (file-exists-p save-dir)
   (make-directory save-dir))
 
