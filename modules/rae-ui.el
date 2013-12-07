@@ -40,7 +40,7 @@
   (set-face-attribute 'default nil :font "Menlo-13"))
 
 (when (memq window-system '(w32))
-  (set-face-attribute 'default nil :font "Consolas-11"))
+  (set-face-attribute 'default nil :font "Consolas-10"))
 
 ;; shut the hell up
 (setq visible-bell t)
