@@ -41,9 +41,12 @@
            "Unread 30x500 list" ?3)
           ("flag:unread AND list:newworkcity.googlegroups.com"
            "Unread NWC list" ?n)
+          ("flag:unread AND list:clojure.googlegroups.com"
+           "Unread Clojure list" ?c)
           ("from:jira@mamajamas.atlassian.net"
            "Mamajamas JIRA Issues" ?j)
-          ("flag:unread AND list:*"           "Unread lists" ?l)
+          ("flag:unread AND list:* AND NOT maildir:\"/Spam\""
+           "Unread lists" ?l)
           ("date:today..now"                  "Today's messages"     ?t)
           ("date:7d..now"                     "Last 7 days"          ?w)
           ("mime:image/*"                     "Messages with images" ?p)))
