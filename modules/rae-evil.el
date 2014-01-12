@@ -24,6 +24,7 @@
   "k" 'kill-buffer
   "SPC" 'ace-jump-mode
   "m" 'ace-jump-char-mode
+  "/" 'rae-google
   "." 'projectile-find-file)
 
 ;; commenting
