@@ -166,7 +166,9 @@ The body of the advice is in BODY."
   "Enter a distraction free writing environment"
   (interactive)
   (delete-other-windows)
-  (markdown-mode)
+  (org-narrow-to-subtree)
+  (auto-fill-mode -1)
+  (visual-line-mode +1)
   (writegood-mode +1)
   (wc-mode +1)
   (wc-set-word-goal 500)

@@ -563,3 +563,11 @@
 ;; (add-hook 'org-clock-in-hook 'rae/org-pomodoro-start-maybe)
 ;; (add-hook 'org-pomodoro-short-break-finished-hook 'rae/org-pomodoro-start-maybe)
 ;; (add-hook 'org-pomodoro-long-break-finished-hook 'rae/org-pomodoro-start-maybe)
+
+;;;; journaling
+(require 'org-journal)
+(setq org-journal-dir
+      (concat rae-org-dir "/Dropbox/Documents/Writing/Journal/"))
+(setq org-journal-file-format "%Y%m%d.txt")
+(setq org-journal-file-pattern "[0-9]\\{8\\}\.txt")
+(setq org-journal-date-prefix "#+STARTUP:noindent\n* ")

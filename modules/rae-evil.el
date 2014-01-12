@@ -107,3 +107,5 @@
        "j" 'evil-next-line
        "RET" 'mu4e-view-message)
      ))
+
+(evil-set-initial-state 'calendar-mode 'emacs)
