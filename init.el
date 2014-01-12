@@ -33,7 +33,7 @@
                       color-theme-sanityinc-tomorrow
                       zenburn-theme
                       key-chord
-                      web-mode scss-mode
+                      web-mode scss-mode haml-mode
                       flx-ido
                       projectile
                       smartparens
@@ -42,7 +42,7 @@
                       flymake flymake-cursor flymake-shell
                       clojure-mode clojure-test-mode
                       ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
-                      rspec-mode)
+                      rspec-mode yaml-mode)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
