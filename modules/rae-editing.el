@@ -159,3 +159,15 @@ The body of the advice is in BODY."
 
 ;; global auto-revert
 (global-auto-revert-mode t)
+
+;; writing prose
+(require 'wc-mode)
+(defun rae-write-mode ()
+  "Enter a distraction free writing environment"
+  (interactive)
+  (delete-other-windows)
+  (markdown-mode)
+  (writegood-mode +1)
+  (wc-mode +1)
+  (wc-set-word-goal 500)
+  (writeroom-mode +1))
