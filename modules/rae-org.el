@@ -198,6 +198,7 @@
                             ("MAMAJAMAS" . nil)
                             ("BRITESPOKES" . nil)
                             ("KUONI" . nil)
+                            ("CHECKMATE" . nil)
                             (:endgroup)
                             ("READING" . nil)
                             (:startgroup)
