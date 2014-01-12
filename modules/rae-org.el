@@ -458,6 +458,9 @@
 ;; minute after midnight
 (run-at-time "24:01" nil 'bh/org-agenda-to-appt)
 
+;; periodically save all org buggers
+(run-at-time "1 min" 60 'org-save-all-org-buffers)
+
 ;; integrate with osx notification center
 ;; http://thread.gmane.org/gmane.emacs.orgmode/5664/focus=5806
 (when (eq system-type 'darwin)
