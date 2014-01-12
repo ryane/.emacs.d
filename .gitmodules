@@ -4,3 +4,6 @@
 [submodule "vendor/org-pomodoro"]
 	path = vendor/org-pomodoro
 	url = git@github.com:ryane/org-pomodoro.git
+[submodule "vendor/org-journal"]
+	path = vendor/org-journal
+	url = git@github.com:bastibe/org-journal.git
