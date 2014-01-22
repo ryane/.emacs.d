@@ -555,6 +555,13 @@
   (if (equal org-pomodoro-state :none)
       (org-pomodoro)))
 
+(defun rae/org-pomodoro-start()
+  (interactive)
+  (if (equal org-pomodoro-state :none)
+      (progn
+        (org-clock-goto)
+        (org-pomodoro))))
+
 ;; capture a note when the pomodoro is finished
 (add-hook 'org-pomodoro-finished-hook '(lambda ()
                                          (org-capture nil "j")))

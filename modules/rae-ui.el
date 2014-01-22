@@ -24,6 +24,7 @@
 (global-set-key (kbd "<f9> I") 'bh/punch-in)
 (global-set-key (kbd "<f9> O") 'bh/punch-out)
 (global-set-key (kbd "<f9> g") 'org-clock-goto)
+(global-set-key (kbd "<f9> p") 'rae/org-pomodoro-start)
 (global-set-key (kbd "<f9> s")
                 '(lambda() (interactive)(switch-to-buffer "*scratch*")))
 (global-set-key (kbd "<f9> h") 'bh/hide-other)
