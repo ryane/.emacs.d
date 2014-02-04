@@ -317,7 +317,7 @@ when not restricted, skip project and sub-project tasks, habits, and project rel
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max))))
           (subtree-end (save-excursion (org-end-of-subtree t))))
       (if (member (org-get-todo-state) org-todo-keywords-1)
-          (if (member (org-get-todo-state) org-done-keywords)
+          (if (and (member (org-get-todo-state) org-done-keywords) (not (member "noarchive" (org-get-tags-at))))
               (let* ((daynr (string-to-int (format-time-string "%d" (current-time))))
                      (a-month-ago (* 60 60 24 (+ daynr 1)))
                      (last-month (format-time-string "%Y-%m-" (time-subtract (current-time) (seconds-to-time a-month-ago))))
