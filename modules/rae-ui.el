@@ -14,6 +14,9 @@
 
 ;; (require 'flymake-cursor)
 
+;; better scrolling
+(setq mouse-wheel-scroll-amount (quote (0.01)))
+
 ;; Global bindings
 (global-set-key (kbd "C-S-u") 'universal-argument)
 (global-set-key (kbd "C-x g") 'magit-status)
