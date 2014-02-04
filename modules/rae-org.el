@@ -38,6 +38,9 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+;; let's try speed keys
+(setq org-use-speed-commands t)
+
 ;; make sure a parent task can't be completed if it has active subtasks
 (setq org-enforce-todo-dependencies t)
 
