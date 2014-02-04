@@ -25,6 +25,7 @@
   "SPC" 'ace-jump-mode
   "m" 'ace-jump-char-mode
   "/" 'rae-google
+  "x" 'helm-etags-select
   "." 'projectile-find-file)
 
 ;; commenting
