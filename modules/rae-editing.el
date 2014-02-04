@@ -28,6 +28,9 @@
 (require 'smartparens-ruby)
 (show-smartparens-global-mode +1)
 
+;; I use single spacing for my sentences
+(setq sentence-end-double-space nil)
+
 ;; whitespace defaults
 (setq whitespace-line-column 80) ;; limit line length
 
