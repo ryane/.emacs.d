@@ -170,7 +170,15 @@
 
               ("m" "Meeting" entry
                (file 'org-default-notes-file)
-               "* MEET with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+               "* Meeting with %? %u :MEETING:\n%T" :clock-in t :clock-resume t)
+
+              ("s" "Standup" entry
+               (file 'org-default-notes-file)
+               "* Standup %u :MEETING:\n%T" :clock-in t :clock-resume t)
+
+              ("g" "Mastermind" entry
+               (file 'org-default-notes-file)
+               "* Mastermind %u :MEETING:\n%T" :clock-in t :clock-resume t)
 
               ("p" "Phone call" entry
                (file 'org-default-notes-file)
