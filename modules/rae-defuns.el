@@ -42,3 +42,9 @@
     (url-hexify-string (if mark-active
          (buffer-substring (region-beginning) (region-end))
        (read-string "Google: "))))))
+
+(defun rae/mamajamas-fix-stylesheets ()
+  (interactive)
+  (set-buffer-file-coding-system 'undecided-unix)
+  (whitespace-cleanup)
+  (delete-trailing-whitespace))
