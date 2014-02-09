@@ -348,7 +348,7 @@
 
 ;; customize the clock report in the agenda
 (setq org-agenda-clockreport-parameter-plist
-      (quote (:link t :maxlevel 3 :fileskip0 t :stepskip0 t)))
+      (quote (:link t :maxlevel 4 :fileskip0 t :stepskip0 t)))
 
 ;;;; Custom agenda command definitions
 (setq org-agenda-custom-commands
