@@ -394,6 +394,8 @@
                             (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
                             (org-agenda-sorting-strategy
                              '(category-keep))))
+                (todo "IDEA"
+                           ((org-agenda-overriding-header "Ideas")))
                 (tags-todo "-QUIT+WAIT/!"
                            ((org-agenda-overriding-header "Waiting and Postponed Tasks")
                             (org-agenda-skip-function 'bh/skip-stuck-projects)
