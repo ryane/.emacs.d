@@ -98,13 +98,14 @@
 (setq org-todo-keywords
       (quote (
               (sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w@/!)" "HOLD(h)" "|"
-                        "DONE(d)" "QUIT(q@/!)" "MEET" "CALL"))))
+                        "DONE(d)" "QUIT(q@/!)" "IDEA(i)" "MEET" "CALL"))))
 
 ;; pulled some colors from the tomorrow-night theme
 (setq org-todo-keyword-faces
       (quote (("TODO" org-todo)
               ("NEXT" :foreground "#8abeb7" :weight bold) ;; aqua
               ("PROG" :foreground "#de935f" :weight bold) ;; orange
+              ("IDEA" :foreground "#de935f" :weight bold) ;; orange
               ("HOLD" :foreground "#b294bb" :weight bold) ;; comment
               ("WAIT" :foreground "#b294bb" :weight bold) ;; comment
               ("DONE" org-done)
