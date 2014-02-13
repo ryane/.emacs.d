@@ -3,14 +3,8 @@
 
 ;; additional modules
 (setq org-modules '(org-w3m
-                    org-bbdb
-                    org-bibtex
                     org-docview
-                    org-gnus
                     org-info
-                    org-irc
-                    org-mhe
-                    org-rmail
                     org-habit
                     org-drill
                     org-timer
