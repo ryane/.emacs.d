@@ -165,6 +165,7 @@ The body of the advice is in BODY."
 
 ;; writing prose
 (require 'wc-mode)
+(require 'sentence-highlight)
 (defun rae-write-mode ()
   "Enter a distraction free writing environment"
   (interactive)
@@ -175,4 +176,5 @@ The body of the advice is in BODY."
   (writegood-mode +1)
   (wc-mode +1)
   (wc-set-word-goal 500)
+  (sentence-highlight-mode +1)
   (writeroom-mode +1))
