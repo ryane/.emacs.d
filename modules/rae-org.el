@@ -128,18 +128,26 @@
 (setq org-agenda-diary-file
       (concat rae-org-dir "/Dropbox/Documents/Organizer/diary.org.txt"))
 (setq org-capture-templates
-      (quote (("t" "todo" entry
+      (quote (("t" "Todo" entry
                (file 'org-default-notes-file)
                "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
 
-              ("r" "respond" entry
+              ("r" "Respond" entry
                (file 'org-default-notes-file)
                "* NEXT Respond to email\nSCHEDULED: %t\n%U\n%a\n"
                :clock-in t :clock-resume t :immediate-finish t)
 
-              ("n" "note" entry
+              ("n" "Note" entry
                (file 'org-default-notes-file)
-               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+               "* %? :note:\n%u\n%a\n" :clock-in t :clock-resume t)
+
+              ("i" "Idea" entry
+               (file 'org-default-notes-file)
+               "* IDEA %?\n%U\n%a\n" :clock-in t :clock-resume t)
+
+              ("b" "Blog Post" entry
+               (file 'org-default-notes-file)
+               "* IDEA %? :BLOG:\n%U\n%a\n" :clock-in t :clock-resume t)
 
               ("j" "Journal" entry
                (file+datetree
@@ -178,6 +186,10 @@
               ("p" "Phone call" entry
                (file 'org-default-notes-file)
                "* CALL %? :CALL:\n%U" :clock-in t :clock-resume t)
+
+              ("x" "Drill" entry
+               (file 'org-default-notes-file)
+               "* %^{Question} :drill:\n %t\n\n %^{Description} \n\n** Answer \n\n%^{Answer}\n\n")
 
               ("h" "Habit" entry
                (file 'org-default-notes-file)
