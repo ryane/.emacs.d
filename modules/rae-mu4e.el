@@ -153,11 +153,19 @@
           (goto-char (point-min))))
       (switch-to-buffer buf)))
 
+  (defun rae-mu4e-view-in-gmail (msg)
+    "View the message in the Gmail web interface."
+    (interactive)
+    (let ((msgid (mu4e-msg-field (mu4e-message-at-point t) :message-id))
+          (url "https://mail.google.com/mail/ca/u/0/#search/rfc822msgid:%s"))
+      (browse-url (format url msgid))))
+
   (setq mu4e-view-actions
         '(
           ("capture message"     . mu4e-action-capture-message)
           ("tview as plain text" . rae-mu4e-view-plain-text-message)
           ("bview in browser"    . mu4e-msgv-action-view-in-browser)
+          ("gview in gmail"      . rae-mu4e-view-in-gmail)
           ("pview as pdf"        . mu4e-action-view-as-pdf)))
 
   (defun rae-run-mu4e ()
