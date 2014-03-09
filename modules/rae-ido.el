@@ -2,8 +2,10 @@
 (require 'ido)
 (require 'ido-ubiquitous)
 (require 'flx-ido)
+(require 'ido-vertical-mode)
 (ido-mode t)
 (ido-ubiquitous t)
+(ido-vertical-mode 1)
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
       confirm-nonexistent-file-or-buffer nil
