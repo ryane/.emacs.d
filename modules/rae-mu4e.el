@@ -100,7 +100,7 @@
   (setq mu4e-attachment-dir  "~/Downloads")
 
   ;; show fancy chars, images, and other tweaks
-  (setf mu4e-use-fancy-chars t)
+  (setf mu4e-use-fancy-chars nil)
   (setf mu4e-view-show-images t)
   (setf mu4e-headers-skip-duplicates t)
   ;; (setf mu4e-headers-include-related t) ;; i don't like this on by default
