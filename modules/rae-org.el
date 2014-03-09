@@ -97,8 +97,9 @@
 ;; todo
 (setq org-todo-keywords
       (quote (
-              (sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w@/!)" "HOLD(h)" "|"
-                        "DONE(d)" "QUIT(q@/!)" "IDEA(i)" "MEET" "CALL"))))
+              (sequence "TODO(t)" "NEXT(n)" "PROG(p)" "IDEA(i)"
+                        "WAIT(w@/!)" "HOLD(h)" "|"
+                        "DONE(d)" "QUIT(q@/!)"  "MEET" "CALL"))))
 
 ;; pulled some colors from the tomorrow-night theme
 (setq org-todo-keyword-faces
