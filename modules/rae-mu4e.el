@@ -99,7 +99,7 @@
   ;; save attachments to Downloads
   (setq mu4e-attachment-dir  "~/Downloads")
 
-  ;; show fancy chars, images, and other tweaks
+  ;; fancy chars, images, and other tweaks
   (setf mu4e-use-fancy-chars nil)
   (setf mu4e-view-show-images t)
   (setf mu4e-headers-skip-duplicates t)
@@ -119,7 +119,8 @@
   (when (fboundp 'imagemagick-register-types)
     (imagemagick-register-types))
 
-;;; message view action
+  ;;; message view action
+  ;;; http://www.brool.com/index.php/using-mu4e
   (defun mu4e-msgv-action-view-in-browser (msg)
     "View the body of the message in a web browser."
     (interactive)
@@ -133,9 +134,6 @@
          "content=\"text/html;charset=UTF-8\">"
          html))
       (browse-url (concat "file://" tmpfile))))
-
-  (add-to-list 'mu4e-view-actions
-               '("View in browser" . mu4e-msgv-action-view-in-browser) t)
 
   ;; there may be a built-in way to do this but I can't find it
   ;; ability to switch to the plain text version of a message
@@ -154,24 +152,29 @@
           (view-mode)
           (goto-char (point-min))))
       (switch-to-buffer buf)))
-  (add-to-list 'mu4e-view-actions
-               '("plain text" . rae-mu4e-view-plain-text-message) t)
+
+  (setq mu4e-view-actions
+        '(
+          ("capture message"     . mu4e-action-capture-message)
+          ("tview as plain text" . rae-mu4e-view-plain-text-message)
+          ("bview in browser"    . mu4e-msgv-action-view-in-browser)
+          ("pview as pdf"        . mu4e-action-view-as-pdf)))
 
   (defun rae-run-mu4e ()
     (interactive)
     (make-frame-command)
     (mu4e))
-  )
 
-(defun mu4e-headers-mark-all-delete ()
-  "Put a D \(delete) mark on all visible messages."
-  (interactive)
-  (mu4e-headers-mark-for-each-if
-   (cons 'delete nil)
-   (lambda (msg param) t)))
+  (defun mu4e-headers-mark-all-delete ()
+    "Put a D \(delete) mark on all visible messages."
+    (interactive)
+    (mu4e-headers-mark-for-each-if
+     (cons 'delete nil)
+     (lambda (msg param) t)))
 
-(defun mu4e-headers-delete-all ()
-  "Delete all visible messages."
-  (interactive)
-  (mu4e-headers-mark-all-delete)
-  (mu4e-mark-execute-all t))
+  (defun mu4e-headers-delete-all ()
+    "Delete all visible messages."
+    (interactive)
+    (mu4e-headers-mark-all-delete)
+    (mu4e-mark-execute-all t))
+)
