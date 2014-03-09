@@ -45,6 +45,11 @@
 (require 'sgml-mode) ;; requires smgl-mode to be loaded
 (global-evil-matchit-mode 1)
 
+;; quick jumps using ace
+(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+(define-key evil-visual-state-map (kbd "SPC") 'ace-jump-mode)
+
+
 ;; use jk to exit insert mode
 ;; this has to be done after evil is turned on
 ;; (setq key-chord-two-keys-delay 0.2)
