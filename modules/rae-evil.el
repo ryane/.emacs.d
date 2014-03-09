@@ -19,6 +19,7 @@
   "g" 'magit-status
   "a" 'rspec-toggle-spec-and-target
   "t" 'rspec-rerun
+  "T" 'rspec-verify-all
   "v" 'rspec-verify
   "V" 'rspec-verify-single
   "k" 'kill-buffer
