@@ -38,6 +38,8 @@
 (global-set-key (kbd "<S-f5>") 'bh/widen)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
 
 ;; Font
 (when (memq window-system '(mac ns))
