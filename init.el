@@ -90,3 +90,5 @@
   (exec-path-from-shell-initialize))
 
 (server-start)
+
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 176) (height . 53)))
