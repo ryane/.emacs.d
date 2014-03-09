@@ -32,6 +32,7 @@
                       color-theme-sanityinc-solarized
                       color-theme-sanityinc-tomorrow
                       zenburn-theme
+                      leuven-theme
                       key-chord
                       web-mode scss-mode haml-mode
                       flx-ido
