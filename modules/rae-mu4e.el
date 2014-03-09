@@ -31,6 +31,8 @@
 
   (setq mu4e-bookmarks
         '(
+          ("(flag:unread AND NOT flag:trashed AND NOT maildir:\"/Spam\") OR maildir:\"/Inbox\""
+           "Daily Review" ?d)
           ("flag:unread AND NOT flag:trashed AND NOT list:* AND NOT maildir:\"/Spam\""
            "Unread messages, no lists" ?U)
           ("flag:unread AND NOT flag:trashed AND NOT maildir:\"/Spam\""
@@ -43,6 +45,8 @@
            "Unread NWC list" ?n)
           ("flag:unread AND list:clojure.googlegroups.com"
            "Unread Clojure list" ?c)
+          ("flag:unread AND list:discourse.forum.rubyrogues-parley.parley.rubyrogues.com"
+           "Unread RubyRogues Parley list" ?r)
           ("from:jira@mamajamas.atlassian.net"
            "Mamajamas JIRA Issues" ?j)
           ("flag:unread AND list:* AND NOT maildir:\"/Spam\""
