@@ -108,6 +108,8 @@
        "j" 'evil-next-line
        "C" 'mu4e-compose-new
        "o" 'mu4e-headers-view-message
+       "_" 'mu4e-headers-flag-all-read
+       "~" 'mu4e-headers-delete-all
        )
 
      (evil-add-hjkl-bindings mu4e-main-mode-map 'normal

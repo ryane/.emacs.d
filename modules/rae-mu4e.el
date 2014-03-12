@@ -184,5 +184,4 @@
     "Delete all visible messages."
     (interactive)
     (mu4e-headers-mark-all-delete)
-    (mu4e-mark-execute-all t))
-)
+    (mu4e-mark-execute-all t)))
