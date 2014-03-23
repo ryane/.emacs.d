@@ -8,7 +8,8 @@
                     org-habit
                     org-drill
                     org-timer
-                    org-checklist))
+                    org-checklist
+                    orgbox))
 
 (defun rae-org-mode-defaults ()
   "Default settings for org-mode"

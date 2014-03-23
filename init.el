@@ -43,6 +43,7 @@
                       flymake flymake-cursor flymake-shell
                       clojure-mode clojure-test-mode
                       ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
+                      orgbox
                       rspec-mode yaml-mode)
   "A list of packages to ensure are installed at launch.")
 
@@ -87,7 +88,8 @@
 ;; On OS X Emacs doesn't use the shell PATH if it's not started from
 ;; the shell. Let's fix that:
 (when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
+)
 
 (server-start)
 
