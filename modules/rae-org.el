@@ -141,7 +141,7 @@
 
               ("n" "Note" entry
                (file 'org-default-notes-file)
-               "* %? :note:\n%u\n%a\n" :clock-in t :clock-resume t)
+               "* %? :NOTE:\n%u\n%a\n" :clock-in t :clock-resume t)
 
               ("i" "Idea" entry
                (file 'org-default-notes-file)
