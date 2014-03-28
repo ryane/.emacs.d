@@ -52,5 +52,18 @@
 (setq visible-bell t)
 
 ;; don't use osx native fullscreen
-(setq ns-use-native-fullscreen nil)
-(global-set-key (kbd "<f6>") 'toggle-frame-fullscreen)
+;; obsolete
+;; (setq ns-use-native-fullscreen nil)
+;; (global-set-key (kbd "<f6>") 'toggle-frame-fullscreen)
+;; http://stackoverflow.com/questions/9248996/how-to-toggle-fullscreen-with-emacs-as-default
+;; if you want to use native osx fullscreen, change it to
+(defun toggle-fullscreen() "toggle-fullscreen, same as clicking the
+ corresponding titlebar icon in the right hand corner of Mac app windows"
+  (interactive)
+  (set-frame-parameter
+   nil 'fullscreen
+   (pcase (frame-parameter nil 'fullscreen)
+     (`fullboth nil)
+     (`fullscreen nil)
+     (_ 'fullboth))))
+(global-set-key (kbd "H-f") 'toggle-fullscreen)
