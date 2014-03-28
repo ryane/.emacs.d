@@ -376,7 +376,7 @@
                ((org-agenda-overriding-header "Habits")
                 (org-agenda-sorting-strategy
                  '(todo-state-down effort-up category-keep))))
-              (" " "Agenda"
+              ("." "Review and Planning"
                ((agenda "" nil)
                 (tags "REFILE"
                       ((org-agenda-overriding-header "Tasks to Refile")
@@ -421,6 +421,8 @@
                        (org-agenda-skip-function 'bh/skip-non-archivable-tasks)
                        (org-tags-match-list-sublevels nil))))
                nil)
+              (" " "Agenda"
+               ((agenda "" nil)) nil)
               ("r" "Tasks to Refile" tags "REFILE"
                ((org-agenda-overriding-header "Tasks to Refile")
                 (org-tags-match-list-sublevels nil)))
