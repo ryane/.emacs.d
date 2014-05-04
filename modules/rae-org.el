@@ -426,7 +426,11 @@
                        (org-tags-match-list-sublevels nil))))
                nil)
               (" " "Agenda"
-               ((agenda "" nil)) nil)
+               ((agenda "" nil)
+                (tags "REFILE"
+                      ((org-agenda-overriding-header "Tasks to Refile")
+                       (org-tags-match-list-sublevels nil)))
+                ) nil)
               ("r" "Tasks to Refile" tags "REFILE"
                ((org-agenda-overriding-header "Tasks to Refile")
                 (org-tags-match-list-sublevels nil)))
