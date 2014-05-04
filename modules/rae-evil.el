@@ -63,6 +63,8 @@
 (evil-add-hjkl-bindings magit-status-mode-map 'emacs
   "K" 'magit-discard-item
   "l" 'magit-key-mode-popup-logging
+  "Q" 'magit-mode-quit-window
+  "q" 'suspend-frame
   "h" 'magit-toggle-diff-refine-hunk)
 (evil-add-hjkl-bindings magit-log-mode-map 'emacs)
 (evil-add-hjkl-bindings magit-commit-mode-map 'emacs)
