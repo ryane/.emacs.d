@@ -78,6 +78,10 @@
 (setq org-clock-idle-time 10)
 ;; display the clock in the mode line and frame title
 (setq org-clock-clocked-in-display 'both)
+;; format clock time (never use 2d)
+(setq org-time-clocksum-format
+      (quote
+       (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
 
 ;; use the norang clocking system
 (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
