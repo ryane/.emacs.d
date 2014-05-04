@@ -48,8 +48,22 @@
 (when (memq window-system '(w32))
   (set-face-attribute 'default nil :font "Consolas-10"))
 
+(when (memq window-system '(x))
+  (set-face-attribute 'default nil :font "Inconsolata-12"))
+
 ;; shut the hell up
 (setq visible-bell t)
+(setq ring-bell-function 'ignore)
+
+;; ace window
+(global-set-key (kbd "M-p") 'ace-window)
+
+;; hack to handle remapped return key in linux
+(when (memq system-type '(gnu/linux))
+  (global-set-key [key-4660] 'do-nothing)
+  (defun do-nothing()
+    "does nothing"
+    (interactive)))
 
 ;; don't use osx native fullscreen
 ;; obsolete
