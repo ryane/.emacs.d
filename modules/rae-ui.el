@@ -67,3 +67,19 @@
      (`fullscreen nil)
      (_ 'fullboth))))
 (global-set-key (kbd "H-f") 'toggle-fullscreen)
+
+;; handle display of special buffers based on my preferences
+;; i like frames sometimes
+;; show rspec tests in a dedicated frame
+(add-to-list
+ 'display-buffer-alist
+ '("\\*rspec-compilation\\*" (display-buffer-reuse-window display-buffer-pop-up-frame)
+   (reusable-frames . t)))
+
+;; show magit in a dedicated frame
+(add-to-list
+ 'display-buffer-alist
+ '("\\*magit: .*\\*" (display-buffer-reuse-window display-buffer-pop-up-frame)
+   (reusable-frames . t)))
+;; (define-key magit-status-mode-map (kbd "Q") 'magit-mode-quit-window)
+;; (define-key magit-status-mode-map (kbd "q") 'suspend-frame)
