@@ -44,6 +44,7 @@
                       clojure-mode clojure-test-mode
                       ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
                       orgbox
+                      haskell-mode ghc
                       rspec-mode yaml-mode)
   "A list of packages to ensure are installed at launch.")
 
