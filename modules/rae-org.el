@@ -29,7 +29,7 @@
 
 ;; global bindings
 (global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cc" 'make-capture-frame)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
@@ -133,6 +133,43 @@
       (concat rae-org-dir "/Dropbox/Documents/Organizer/inbox.org.txt"))
 (setq org-agenda-diary-file
       (concat rae-org-dir "/Dropbox/Documents/Organizer/diary.org.txt"))
+
+;; make the frame contain a single window. by default org-capture
+;; splits the window.
+(defadvice org-capture-finalize
+  (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
+(defadvice org-switch-to-buffer-other-window
+  (after supress-window-splitting activate)
+  "Delete the extra window if we're in a capture frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-other-windows)))
+
+(defadvice org-capture-kill
+  (after delete-capture-frame activate)
+  "Advise capture-kill to close the frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
+(defun make-capture-frame ()
+  "Create a new frame and run org-capture."
+  (interactive)
+  (make-frame '((name . "capture")
+                (width . 85)
+                (height . 45)))
+  (select-frame-by-name "capture")
+  (setq word-wrap 1)
+  (setq truncate-lines nil)
+  (org-capture))
+
+(defadvice org-capture-finalize
+  (after log-org-capture-finalize activate)
+  "Log when org-capture-finalize is called"
+  (message "org-capture-finalize"))
+
 (setq org-capture-templates
       (quote (("t" "Todo" entry
                (file 'org-default-notes-file)
