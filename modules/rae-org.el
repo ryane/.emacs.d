@@ -154,6 +154,12 @@
   (if (equal "capture" (frame-parameter nil 'name))
       (delete-frame)))
 
+(defadvice org-capture-select-template
+  (around org-around-capture-template activate)
+  (unless (ignore-errors ad-do-it t)
+    (if (equal "capture" (frame-parameter nil 'name))
+        (delete-frame))))
+
 (defun make-capture-frame ()
   "Create a new frame and run org-capture."
   (interactive)
@@ -164,11 +170,6 @@
   (setq word-wrap 1)
   (setq truncate-lines nil)
   (org-capture))
-
-(defadvice org-capture-finalize
-  (after log-org-capture-finalize activate)
-  "Log when org-capture-finalize is called"
-  (message "org-capture-finalize"))
 
 (setq org-capture-templates
       (quote (("t" "Todo" entry
@@ -195,19 +196,19 @@
               ("j" "Journal" entry
                (file+datetree
                 (concat rae-org-dir
-                 "/Dropbox/Documents/Organizer/diary.org.txt"))
+                        "/Dropbox/Documents/Organizer/diary.org.txt"))
                "* %?\n%U\n%a\n" :clock-in t :clock-resume t)
 
               ("e" "Event" entry
                (file+datetree
                 (concat rae-org-dir
-                 "/Dropbox/Documents/Organizer/diary.org.txt"))
+                        "/Dropbox/Documents/Organizer/diary.org.txt"))
                "* %?\n:PROPERTIES:\n:CATEGORY: event\n:END:\n%T\n%a\n" :clock-in t :clock-resume t)
 
               ("d" "Daily Outcomes" entry
                (file+datetree
                 (concat rae-org-dir
-                 "/Dropbox/Documents/Organizer/daily_review.org.txt"))
+                        "/Dropbox/Documents/Organizer/daily_review.org.txt"))
                "* TODO %?\n%t\n%a\n" :clock-in t :clock-resume t)
 
               ("w" "org-protocol" entry
@@ -255,6 +256,7 @@
                             ("NOTE" . ?n)
                             ("QUIT" . ?q)
                             ("FLAGGED" . ??)
+                            ("OUTSOURCE" . ?X)
                             (:startgroup)
                             ("MAMAJAMAS" . nil)
                             ("BRITESPOKES" . nil)
@@ -294,13 +296,13 @@
 ;; Targets complete directly with IDO
 (setq org-outline-path-complete-in-steps nil)
 
-; Allow refile to create parent tasks with confirmation
+                                        ; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 
-; Use IDO
+                                        ; Use IDO
 (setq org-completion-use-ido t)
 
-; Exclude DONE state tasks from refile targets
+                                        ; Exclude DONE state tasks from refile targets
 (defun rae/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets"
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
@@ -319,8 +321,8 @@
 
 ;;;; effort estimation
 ;; Set default column view headings: Task Effort Clock_Summary
-; global Effort estimate values
-; global STYLE property values for completion
+                                        ; global Effort estimate values
+                                        ; global STYLE property values for completion
 (setq org-global-properties
       (quote (
               ("Effort_ALL" . "0:15 0:25 0:30 0:45 1:00 2:00 3:00 4:00 0:00")
@@ -450,7 +452,7 @@
                             (org-agenda-sorting-strategy
                              '(category-keep))))
                 (todo "IDEA"
-                           ((org-agenda-overriding-header "Ideas")))
+                      ((org-agenda-overriding-header "Ideas")))
                 (tags-todo "-QUIT+WAIT/!"
                            ((org-agenda-overriding-header "Waiting and Postponed Tasks")
                             (org-agenda-skip-function 'bh/skip-stuck-projects)
@@ -552,7 +554,7 @@
         (beep 1)))
 
   (setq appt-disp-window-function (function rae/appt-disp-window)))
-  (setq appt-delete-window-function (function rae/appt-delete-window))
+(setq appt-delete-window-function (function rae/appt-delete-window))
 
 ;;;; focusing on current work
 (add-hook 'org-agenda-mode-hook
@@ -611,7 +613,7 @@
 (setq org-special-ctrl-k t)
 (setq org-yank-adjusted-subtrees t)
 
-; position the habit graph on the agenda to the right of the default
+                                        ; position the habit graph on the agenda to the right of the default
 (setq org-habit-graph-column 50)
 
 (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
