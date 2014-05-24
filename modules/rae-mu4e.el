@@ -12,10 +12,12 @@
   ;; this might need to be tweaked per os
   (setq mu4e-mu-binary "/usr/local/bin/mu")
 
-  (setq mu4e-drafts-folder "/Drafts")
-  (setq mu4e-sent-folder   "/Sent")
-  (setq mu4e-trash-folder  "/Trash")
-  (setq mu4e-refile-folder  "/Archive")
+  (setq mu4e-change-filenames-when-moving t)
+
+  (setq mu4e-drafts-folder "/[Gmail]/.Drafts")
+  (setq mu4e-sent-folder   "/[Gmail]/.Sent Mail")
+  (setq mu4e-trash-folder  "/[Gmail]/.Trash")
+  (setq mu4e-refile-folder  "/[Gmail]/.All Mail")
 
   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
   (setq mu4e-sent-messages-behavior 'delete)
@@ -26,11 +28,11 @@
   ;; the 'All Mail' folder by pressing ``ma''.
 
   (setq mu4e-maildir-shortcuts
-        '( ("/INBOX"   . ?i)
-           ("/Archive" . ?a)
-           ("/Sent"    . ?s)
-           ("/Flagged" . ?f)
-           ("/Trash"   . ?t)))
+        '( ("/INBOX"               . ?i)
+           ("/[Gmail]/.All Mail"   . ?a)
+           ("/[Gmail]/.Sent Mail"  . ?s)
+           ("/[Gmail]/.Flagged"    . ?f)
+           ("/[Gmail]/.Trash"      . ?t)))
 
   (setq mu4e-bookmarks
         '(
