@@ -121,3 +121,4 @@
      ))
 
 (evil-set-initial-state 'calendar-mode 'emacs)
+(evil-set-initial-state 'project-explorer-mode 'emacs)

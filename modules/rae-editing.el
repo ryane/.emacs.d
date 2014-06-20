@@ -122,6 +122,10 @@ Will only occur if prelude-whitespace is also enabled."
 (add-to-list 'hippie-expand-try-functions-list
              'yas/hippie-try-expand)
 
+;; project-explorer
+(require 'project-explorer)
+(setq pe/omit-regex (concat pe/omit-regex "\\|^node_modules$\\|%^\.bundle$"))
+
 ;;;; auto save files
 ;; borrowed from emacs prelude https://github.com/bbatsov/prelude
 (defcustom rae-auto-save t
