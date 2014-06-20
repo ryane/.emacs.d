@@ -97,3 +97,9 @@
    (reusable-frames . t)))
 ;; (define-key magit-status-mode-map (kbd "Q") 'magit-mode-quit-window)
 ;; (define-key magit-status-mode-map (kbd "q") 'suspend-frame)
+
+;; show *cider-error* in dedicated frame
+(add-to-list
+ 'display-buffer-alist
+ '("\\*cider-error\\*" (display-buffer-reuse-window display-buffer-pop-up-frame)
+   (reusable-frames . t)))
