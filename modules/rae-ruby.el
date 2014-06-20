@@ -41,8 +41,7 @@
 (setq rspec-use-rake-when-possible nil)
 
 (defadvice rspec-compile
-  (before rspec-save-before-verify (A-FILE-OR-DIR &optional opts))
+  (before rspec-save-before-compile ())
   "Save current buffer before running rspec"
   (save-buffer))
-
 (ad-activate 'rspec-compile)
