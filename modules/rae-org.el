@@ -553,8 +553,8 @@
     (if appt-audible
         (beep 1)))
 
-  (setq appt-disp-window-function (function rae/appt-disp-window)))
-(setq appt-delete-window-function (function rae/appt-delete-window))
+  (setq appt-disp-window-function (function rae/appt-disp-window))
+  (setq appt-delete-window-function (function rae/appt-delete-window)))
 
 ;;;; focusing on current work
 (add-hook 'org-agenda-mode-hook
