@@ -12,7 +12,7 @@
   ;; this might need to be tweaked per os
   (setq mu4e-mu-binary "/usr/local/bin/mu")
 
-  (setq mu4e-change-filenames-when-moving t)
+  (setq mu4e-change-filenames-when-moving nil)
 
   (setq mu4e-drafts-folder "/[Gmail]/.Drafts")
   (setq mu4e-sent-folder   "/[Gmail]/.Sent Mail")
@@ -29,16 +29,19 @@
 
   (setq mu4e-maildir-shortcuts
         '( ("/INBOX"               . ?i)
+           ("/[Gmail]/.Starred"    . ?s)
+           ("/[Gmail]/.Sent Mail"  . ?t)
+           ("/[Gmail]/.Drafts"     . ?d)
            ("/[Gmail]/.All Mail"   . ?a)
-           ("/[Gmail]/.Sent Mail"  . ?s)
            ("/[Gmail]/.Flagged"    . ?f)
-           ("/[Gmail]/.Trash"      . ?t)))
+           ("/[Gmail]/.Spam"       . ?j)
+           ("/[Gmail]/.Trash"      . ?x)))
 
   (setq mu4e-bookmarks
         '(
-          ("(flag:unread AND NOT flag:trashed AND NOT maildir:\"/Spam\") OR maildir:\"/Inbox\""
+          ("(flag:unread AND NOT flag:trashed AND NOT maildir:\"/[Gmail]/.Spam\") OR maildir:\"/Inbox\""
            "Daily Review" ?d)
-          ("flag:unread AND NOT flag:trashed AND NOT list:* AND NOT maildir:\"/Spam\""
+          ("flag:unread AND NOT flag:trashed AND NOT list:* AND NOT maildir:\"/[Gmail]/.Spam\""
            "Unread messages, no lists" ?U)
           ("flag:unread AND NOT flag:trashed AND NOT maildir:\"/Spam\""
            "All unread messages" ?u)
@@ -61,7 +64,8 @@
           ("mime:image/*"                     "Messages with images" ?p)))
 
   ;; allow for updating mail using 'U' in the main view:
-  (setq mu4e-get-mail-command "offlineimap -f INBOX")
+  ;; (setq mu4e-get-mail-command "offlineimap -f INBOX")
+  (setq mu4e-get-mail-command "mbsync Gmail")
   (setq mu4e-update-interval 1200)
   (add-hook 'mu4e-index-updated-hook
             (defun mu4e-index-updated-notifcation ()
