@@ -169,7 +169,8 @@ The body of the advice is in BODY."
   "Enter a distraction free writing environment"
   (interactive)
   (delete-other-windows)
-  (org-narrow-to-subtree)
+  (if (eq major-mode 'org-mode)
+      (org-narrow-to-subtree))
   (auto-fill-mode -1)
   (visual-line-mode +1)
   (writegood-mode +1)
