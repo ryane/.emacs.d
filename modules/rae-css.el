@@ -9,6 +9,7 @@
      (add-hook 'css-mode-hook (lambda ()
                                 (run-hooks 'rae-css-mode-hook)))))
 
+(add-hook 'scss-mode-hook 'rae-prog-mode-defaults)
 (eval-after-load 'scss-mode
   '(progn
      (setq scss-compile-at-save nil)))
