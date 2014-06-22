@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+#name : ember get property
+# --
+@get('${1:name}')$0

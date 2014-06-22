@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : ember computed property
+# --
+${1:name}: (->
+  $0
+).property(${2:depends})
