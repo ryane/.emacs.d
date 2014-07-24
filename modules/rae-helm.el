@@ -14,4 +14,5 @@
 
 (global-set-key (kbd "C-c h") 'helm-mini)
 (global-set-key (kbd "C-c f") 'helm-projectile)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
 ;; (helm-mode 1)
