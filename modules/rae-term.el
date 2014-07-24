@@ -7,5 +7,4 @@
 (add-hook 'term-mode-hook
           (lambda ()
             (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
-            (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))
-            (define-key term-raw-map (kbd 'C-y') 'term-paste)))
+            (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))))
