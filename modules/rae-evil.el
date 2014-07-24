@@ -12,8 +12,8 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader ",")
 (evil-leader/set-key
-  "e" 'find-file
-  "b" 'switch-to-buffer
+  "e" 'helm-find-files
+  "b" 'helm-buffers-list
   "," 'mode-line-other-buffer
   "f" 'ag
   "g" 'magit-status
@@ -27,7 +27,7 @@
   "m" 'ace-jump-char-mode
   "/" 'rae-google
   "x" 'helm-etags-select
-  "." 'projectile-find-file)
+  "." 'helm-projectile)
 
 ;; commenting
 (setq evilnc-hotkey-comment-operator "gc")
