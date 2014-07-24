@@ -14,6 +14,7 @@
   '(progn
      (defun rae-web-mode-defaults ()
        "Default settings for web mode"
+       (setq web-mode-disable-auto-pairing 't)
        (linum-mode)
        ;; whitespace-mode breaks syntax highlighting
        (whitespace-mode -1))
