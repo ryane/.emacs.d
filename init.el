@@ -38,6 +38,7 @@
                       flx-ido
                       projectile
                       smartparens
+                      project-explorer
                       helm helm-projectile
                       soap-client jira
                       flymake flymake-cursor flymake-shell
