@@ -47,6 +47,7 @@
                       ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
                       haskell-mode ghc
                       sentence-highlight
+                      alert
                       rspec-mode yaml-mode)
   "A list of packages to ensure are installed at launch.")
 
