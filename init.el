@@ -36,15 +36,17 @@
                       key-chord
                       web-mode scss-mode haml-mode
                       flx-ido
+                      ido-vertical-mode
                       projectile
                       project-explorer
                       smartparens
                       helm helm-projectile
-                      soap-client jira
+                      xml-rpc soap-client jira
                       flymake flymake-cursor flymake-shell
                       clojure-mode clojure-test-mode
                       ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
                       haskell-mode ghc
+                      sentence-highlight
                       rspec-mode yaml-mode)
   "A list of packages to ensure are installed at launch.")
 
