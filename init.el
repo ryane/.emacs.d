@@ -54,6 +54,7 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+(defconst *is-a-mac* (eq system-type 'darwin))
 ;; load vendor and custom files
 (defvar emacs-dir (file-name-directory load-file-name)
   "top level emacs dir")
