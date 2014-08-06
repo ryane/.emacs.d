@@ -64,7 +64,7 @@
   "K" 'magit-discard-item
   "l" 'magit-key-mode-popup-logging
   "Q" 'magit-mode-quit-window
-  "q" (if *is-a-mac* 'suspend-frame 'quit-window)
+  "q" (if *is-a-mac* 'suspend-frame 'magit-mode-quit-window)
   "h" 'magit-toggle-diff-refine-hunk)
 (evil-add-hjkl-bindings magit-log-mode-map 'emacs)
 (evil-add-hjkl-bindings magit-commit-mode-map 'emacs)
