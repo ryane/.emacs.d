@@ -16,7 +16,7 @@
   (package-refresh-contents))
 
 (defvar my-packages '(ido-ubiquitous
-                      magit
+                      magit git-timemachine
                       markdown-mode
                       ace-jump-mode
                       multi-term
@@ -37,14 +37,13 @@
                       web-mode scss-mode haml-mode
                       flx-ido
                       projectile
-                      smartparens
                       project-explorer
+                      smartparens
                       helm helm-projectile
                       soap-client jira
                       flymake flymake-cursor flymake-shell
                       clojure-mode clojure-test-mode
                       ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
-                      orgbox
                       haskell-mode ghc
                       rspec-mode yaml-mode)
   "A list of packages to ensure are installed at launch.")
