@@ -34,7 +34,7 @@
                       zenburn-theme
                       leuven-theme
                       key-chord
-                      web-mode scss-mode haml-mode
+                      web-mode scss-mode haml-mode handlebars-mode
                       flx-ido
                       ido-vertical-mode
                       projectile
