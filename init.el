@@ -48,7 +48,8 @@
                       haskell-mode ghc
                       sentence-highlight
                       alert
-                      rspec-mode yaml-mode)
+                      rspec-mode yaml-mode
+                      dockerfile-mode)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
