@@ -35,6 +35,7 @@
                       leuven-theme
                       key-chord
                       web-mode scss-mode haml-mode handlebars-mode
+                      coffee-mode
                       flx-ido
                       ido-vertical-mode
                       projectile
