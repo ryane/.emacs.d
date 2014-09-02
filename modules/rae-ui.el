@@ -103,3 +103,12 @@
  'display-buffer-alist
  '("\\*cider-error\\*" (display-buffer-reuse-window display-buffer-pop-up-frame)
    (reusable-frames . t)))
+
+
+;; group by vc status in ibuffer by default
+(add-hook
+ 'ibuffer-hook
+ (lambda ()
+   (ibuffer-vc-set-filter-groups-by-vc-root)
+   (unless (eq ibuffer-sorting-mode 'alphabetic)
+     (ibuffer-do-sort-by-alphabetic))))

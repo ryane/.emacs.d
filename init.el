@@ -38,6 +38,7 @@
                       coffee-mode
                       flx-ido
                       ido-vertical-mode
+                      ibuffer-vc
                       projectile
                       project-explorer
                       smartparens
@@ -50,6 +51,7 @@
                       sentence-highlight
                       alert
                       rspec-mode yaml-mode
+                      deft
                       dockerfile-mode)
   "A list of packages to ensure are installed at launch.")
 
