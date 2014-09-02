@@ -12,7 +12,7 @@
 ;; Behaviour
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; (require 'flymake-cursor)
+(require 'flymake-cursor)
 
 ;; better scrolling
 ;; (setq mouse-wheel-scroll-amount (quote (0.01)))
