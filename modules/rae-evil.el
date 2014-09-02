@@ -1,6 +1,7 @@
 ;; (require 'evil-org)
 
-(setq evil-want-C-u-scroll t)
+(setq evil-want-C-u-scroll nil)
+(setq evil-want-C-i-jump nil)
 
 ;; Originally C-z but I like to suspend emacs
 ;; I really want to unbind it but I don't know how
