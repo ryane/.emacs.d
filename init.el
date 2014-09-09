@@ -52,12 +52,14 @@
                       alert
                       rspec-mode yaml-mode
                       deft
+                      use-package
                       dockerfile-mode)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+(require 'use-package)
 
 (defconst *is-a-mac* (eq system-type 'darwin))
 ;; load vendor and custom files
