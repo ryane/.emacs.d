@@ -1,15 +1,16 @@
-(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.jbuilder$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+(remove-hook 'enh-ruby-mode-hook 'erm-define-faces)
+
+(add-to-list 'auto-mode-alist '("\\.rake$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.jbuilder$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("Vagrantfile$" . enh-ruby-mode))
 
 (unless (eq system-type 'windows-nt)
   (global-rbenv-mode))
-
 ;; adapted from
 ;; http://ck.kennt-wayne.de/2013/may/emacs%3A-jump-to-matching-paren-beginning-of-block
 (defun goto-matching-ruby-block (arg)
@@ -33,7 +34,7 @@
   (ruby-tools-mode +1)
   (flymake-ruby-load)
   (rae-ruby-evil-overrides))
-(add-hook 'ruby-mode-hook 'rae-ruby-mode-defaults)
+(add-hook 'enh-ruby-mode-hook 'rae-ruby-mode-defaults)
 (add-hook 'inferior-ruby-mode-hook 'ansi-color-for-comint-on)
 
 ;; rspec-mode

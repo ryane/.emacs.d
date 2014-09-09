@@ -46,7 +46,7 @@
                       xml-rpc soap-client jira
                       flymake flymake-cursor flymake-shell
                       clojure-mode clojure-test-mode
-                      ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
+                      enh-ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
                       haskell-mode ghc
                       sentence-highlight
                       alert
