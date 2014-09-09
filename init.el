@@ -21,8 +21,8 @@
                       ace-jump-mode
                       multi-term
                       exec-path-from-shell
-                      window-number
                       winner
+                      window-numbering
                       ag
                       auto-complete
                       diminish
