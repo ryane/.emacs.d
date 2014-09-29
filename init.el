@@ -44,6 +44,7 @@
                       smartparens
                       helm helm-projectile
                       xml-rpc soap-client jira
+                      org-jira
                       flymake flymake-cursor flymake-shell
                       clojure-mode clojure-test-mode
                       enh-ruby-mode ruby-tools inf-ruby flymake-ruby rbenv
