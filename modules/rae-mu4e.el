@@ -12,12 +12,10 @@
   ;; this might need to be tweaked per os
   (setq mu4e-mu-binary "/usr/local/bin/mu")
 
-  (setq mu4e-change-filenames-when-moving nil)
-
-  (setq mu4e-drafts-folder "/[Gmail]/.Drafts")
-  (setq mu4e-sent-folder   "/[Gmail]/.Sent Mail")
-  (setq mu4e-trash-folder  "/[Gmail]/.Trash")
-  (setq mu4e-refile-folder  "/[Gmail]/.All Mail")
+  (setq mu4e-drafts-folder "/Drafts")
+  (setq mu4e-sent-folder   "/Sent")
+  (setq mu4e-trash-folder  "/Trash")
+  (setq mu4e-refile-folder  "/Archive")
 
   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
   (setq mu4e-sent-messages-behavior 'delete)
@@ -28,20 +26,17 @@
   ;; the 'All Mail' folder by pressing ``ma''.
 
   (setq mu4e-maildir-shortcuts
-        '( ("/INBOX"               . ?i)
-           ("/[Gmail]/.Starred"    . ?s)
-           ("/[Gmail]/.Sent Mail"  . ?t)
-           ("/[Gmail]/.Drafts"     . ?d)
-           ("/[Gmail]/.All Mail"   . ?a)
-           ("/[Gmail]/.Flagged"    . ?f)
-           ("/[Gmail]/.Spam"       . ?j)
-           ("/[Gmail]/.Trash"      . ?x)))
+        '( ("/INBOX"   . ?i)
+           ("/Archive" . ?a)
+           ("/Sent"    . ?s)
+           ("/Flagged" . ?f)
+           ("/Trash"   . ?t)))
 
   (setq mu4e-bookmarks
         '(
-          ("(flag:unread AND NOT flag:trashed AND NOT maildir:\"/[Gmail]/.Spam\") OR maildir:\"/Inbox\""
+          ("(flag:unread AND NOT flag:trashed AND NOT maildir:\"/Spam\") OR maildir:\"/Inbox\""
            "Daily Review" ?d)
-          ("flag:unread AND NOT flag:trashed AND NOT list:* AND NOT maildir:\"/[Gmail]/.Spam\""
+          ("flag:unread AND NOT flag:trashed AND NOT list:* AND NOT maildir:\"/Spam\""
            "Unread messages, no lists" ?U)
           ("flag:unread AND NOT flag:trashed AND NOT maildir:\"/Spam\""
            "All unread messages" ?u)
@@ -64,8 +59,7 @@
           ("mime:image/*"                     "Messages with images" ?p)))
 
   ;; allow for updating mail using 'U' in the main view:
-  ;; (setq mu4e-get-mail-command "offlineimap -f INBOX")
-  (setq mu4e-get-mail-command "mbsync Gmail")
+  (setq mu4e-get-mail-command "offlineimap -f INBOX -o")
   (setq mu4e-update-interval 1200)
   (add-hook 'mu4e-index-updated-hook
             (defun mu4e-index-updated-notifcation ()
@@ -122,7 +116,23 @@
 
   ;; need this to convert some e-mails properly
   ;; (setq mu4e-html2text-command "html2text -utf8 -width 72")
-  (setq mu4e-html2text-command "w3m -dump -cols 80 -T text/html")
+  ;; (setq mu4e-html2text-command "w3m -dump -cols 80 -T text/html")
+
+
+  (setq shr-width fill-column)
+  (setq shr-bullet " ")
+
+  (defun shr-html2text ()
+    "Replacement for standard html2text using shr."
+    (interactive)
+    (let ((dom (libxml-parse-html-region (point-min) (point-max))))
+      (erase-buffer)
+      (shr-insert-document dom)
+      (goto-char (point-min))))
+
+  (setq mu4e-html2text-command 'shr-html2text)
+
+
 
   ;; use imagemagick, if available
   (when (fboundp 'imagemagick-register-types)
