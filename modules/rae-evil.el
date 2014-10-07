@@ -1,6 +1,6 @@
 ;; (require 'evil-org)
 
-(setq evil-want-C-u-scroll nil)
+(setq evil-want-C-u-scroll 't)
 (setq evil-want-C-i-jump nil)
 
 ;; Originally C-z but I like to suspend emacs
@@ -50,6 +50,12 @@
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 (define-key evil-visual-state-map (kbd "SPC") 'ace-jump-mode)
 
+; markdown bindings
+(defadvice markdown-mode (before markdown-mode-override-keybindings activate)
+  (evil-define-key 'normal markdown-mode-map "j" 'evil-next-visual-line)
+  (evil-define-key 'normal markdown-mode-map "k" 'evil-previous-visual-line)
+  (evil-define-key 'motion markdown-mode-map "j" 'evil-next-visual-line)
+  (evil-define-key 'motion markdown-mode-map "k" 'evil-previous-visual-line))
 
 ;; use jk to exit insert mode
 ;; this has to be done after evil is turned on
@@ -58,8 +64,11 @@
 ;; (key-chord-mode 1)
 
 ;; Make HJKL keys work in special buffers
-(evil-add-hjkl-bindings magit-branch-manager-mode-map 'emacs
+(require 'magit)
+(evil-add-hjkl-bindings magit-branch-manager-mode-map 'normal
   "K" 'magit-discard-item
+  "q" 'magit-mode-quit-window
+  "Q" 'magit-mode-quit-window
   "L" 'magit-key-mode-popup-logging)
 (evil-add-hjkl-bindings magit-status-mode-map 'emacs
   "K" 'magit-discard-item
@@ -83,6 +92,9 @@
   "J" 'ibuffer-jump-to-buffer
   "K" 'ibuffer-do-kill-lines
   "L" 'ibuffer-redisplay)
+
+(evil-add-hjkl-bindings vc-git-log-view-mode-map 'normal
+  "q" 'quit-window)
 
 ;;; mu4e
 
@@ -118,8 +130,12 @@
      (evil-add-hjkl-bindings mu4e-main-mode-map 'normal
        "J" 'mu4e~headers-jump-to-maildir
        "j" 'evil-next-line
+       "Q" 'mu4e-quit
+       "q" (if *is-a-mac* 'suspend-frame 'mu4e-quit)
        "RET" 'mu4e-view-message)
      ))
 
+(evil-set-initial-state 'magit-branch-manager-mode-map 'normal)
+(evil-set-initial-state 'vc-git-log-view-mode 'normal)
 (evil-set-initial-state 'calendar-mode 'emacs)
 (evil-set-initial-state 'project-explorer-mode 'emacs)
