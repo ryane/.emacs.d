@@ -1,9 +1,9 @@
 [submodule "vendor/org-mode"]
 	path = vendor/org-mode
-	url = git://orgmode.org/org-mode.git
+	url = http://orgmode.org/org-mode.git
 [submodule "vendor/org-pomodoro"]
 	path = vendor/org-pomodoro
-	url = git@github.com:ryane/org-pomodoro.git
+	url = https://github.com/ryane/org-pomodoro.git
 [submodule "vendor/org-journal"]
 	path = vendor/org-journal
-	url = git@github.com:bastibe/org-journal.git
+	url = https://github.com/bastibe/org-journal.git
