@@ -1,4 +1,4 @@
-;; (require 'evil-org)
+(require 'evil-org)
 
 (setq evil-want-C-u-scroll 't)
 (setq evil-want-C-i-jump nil)
@@ -7,7 +7,7 @@
 ;; I really want to unbind it but I don't know how
 ;; to do it without causing problems
 ;; evil-goto-mark seems to take precedence anyway
-(setq evil-toggle-key "C-`")
+;; (setq evil-toggle-key "C-`")
 
 ;; leader mappings
 (global-evil-leader-mode)
@@ -18,17 +18,20 @@
   "," 'mode-line-other-buffer
   "f" 'ag
   "g" 'magit-status
-  "a" 'rspec-toggle-spec-and-target
-  "t" 'rspec-rerun
-  "T" 'rspec-verify-all
-  "v" 'rspec-verify
-  "V" 'rspec-verify-single
   "k" 'kill-buffer
   "SPC" 'ace-jump-mode
   "m" 'ace-jump-char-mode
   "/" 'rae-google
+  "z" 'suspend-frame
   "x" 'helm-etags-select
   "." 'helm-projectile)
+
+(evil-leader/set-key-for-mode 'enh-ruby-mode
+  "a" 'rspec-toggle-spec-and-target
+  "t" 'rspec-rerun
+  "T" 'rspec-verify-all
+  "v" 'rspec-verify
+  "V" 'rspec-verify-single)
 
 ;; commenting
 (setq evilnc-hotkey-comment-operator "gc")
@@ -40,6 +43,7 @@
 
 ;; turn on evil
 (evil-mode 1)
+
 
 ;; evil-matchit
 (require 'evil-matchit)

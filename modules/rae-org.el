@@ -48,6 +48,9 @@
 (setq org-log-into-drawer t)
 (setq org-log-state-notes-insert-after-drawers nil)
 
+;; always show indirect buffers in a new frame
+(setq org-indirect-buffer-display 'new-frame)
+
 ;; clock settings
 
 ;; Resume clocking task when emacs is restarted
@@ -271,6 +274,7 @@
                             ("BRITESPOKES" . nil)
                             ("KUONI" . nil)
                             ("CHECKMATE" . nil)
+                            ("JELDWEN" . nil)
                             (:endgroup)
                             ("READING" . nil)
                             (:startgroup)

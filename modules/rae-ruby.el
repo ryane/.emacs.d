@@ -1,6 +1,7 @@
 (remove-hook 'enh-ruby-mode-hook 'erm-define-faces)
 
 (add-to-list 'auto-mode-alist '("\\.rake$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.cap$" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.ru$" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.jbuilder$" . enh-ruby-mode))
