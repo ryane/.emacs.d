@@ -15,7 +15,9 @@
 
 ;; spell-checking
 (if (memq window-system '(w32))
-    (setq-default ispell-program-name "aspell")
+    (progn
+      (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
+      (setq-default ispell-program-name "aspell"))
   (setq-default ispell-program-name "/usr/local/bin/aspell"))
 (add-hook 'text-mode-hook 'flyspell-mode)
 
