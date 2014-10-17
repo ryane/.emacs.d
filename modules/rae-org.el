@@ -25,7 +25,7 @@
 
 ;; (add-to-list 'auto-mode-alist '("\\.org\\.txt" . org-mode))
 ;; org-mode is the default mode for .org, .org_archive, and .txt files
-(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|org\\.txt\\)$" . org-mode))
 
 ;; global bindings
 (global-set-key "\C-cl" 'org-store-link)
@@ -104,13 +104,14 @@
       (quote (
               (sequence "TODO(t)" "NEXT(n)" "PROG(p)" "IDEA(i)"
                         "WAIT(w@/!)" "HOLD(h)" "|"
-                        "DONE(d)" "QUIT(q@/!)"  "MEET" "CALL"))))
+                        "DONE(d)" "QUIT(q@/!)" "SOMEDAY(s)" "MEET" "CALL"))))
 
 ;; pulled some colors from the tomorrow-night theme
 (setq org-todo-keyword-faces
       (quote (("TODO" org-todo)
               ("NEXT" :foreground "#8abeb7" :weight bold) ;; aqua
               ("PROG" :foreground "#de935f" :weight bold) ;; orange
+              ("SOMEDAY" :foreground "#de935f" :weight bold) ;; orange
               ("IDEA" :foreground "#de935f" :weight bold) ;; orange
               ("HOLD" :foreground "#b294bb" :weight bold) ;; comment
               ("WAIT" :foreground "#b294bb" :weight bold) ;; comment
@@ -205,6 +206,12 @@
                         "/Dropbox/Documents/Organizer/diary.org.txt"))
                "* %?\n:PROPERTIES:\n:CATEGORY: event\n:END:\n%T\n%a\n" :clock-in t :clock-resume t)
 
+              ("s" "Spark" entry
+               (file
+                (concat rae-org-dir
+                        "/Dropbox/Documents/Organizer/spark.org.txt"))
+               "* %?\n%U\n")
+
               ("d" "Daily Outcomes" entry
                (file+datetree
                 (concat rae-org-dir
@@ -215,15 +222,17 @@
                (file 'org-default-notes-file)
                "* TODO Review %c\n%U\n" :immediate-finish t)
 
-              ("m" "Meeting" entry
+              ("m" "Templates for meetings")
+
+              ("mm" "Meeting" entry
                (file 'org-default-notes-file)
                "* Meeting with %? %u :MEETING:\n%T" :clock-in t :clock-resume t)
 
-              ("s" "Standup" entry
+              ("ms" "Standup" entry
                (file 'org-default-notes-file)
                "* Standup %u :MEETING:\n%T" :clock-in t :clock-resume t)
 
-              ("g" "Mastermind" entry
+              ("mg" "Mastermind" entry
                (file 'org-default-notes-file)
                "* Mastermind %u :MEETING:\n%T" :clock-in t :clock-resume t)
 
@@ -443,7 +452,7 @@
                             (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
                             (org-agenda-sorting-strategy
                              '(priority-down todo-state-down effort-up category-keep))))
-                (tags-todo "-REFILE-QUIT-WAIT/!"
+                (tags-todo "-REFILE-QUIT-IDEA-WAIT/!"
                            ((org-agenda-overriding-header (if (marker-buffer org-agenda-restrict-begin) "Project Subtasks" "Standalone Tasks"))
                             (org-agenda-skip-function 'bh/skip-project-tasks-maybe)
                             (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
