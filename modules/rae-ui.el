@@ -46,7 +46,7 @@
   (set-face-attribute 'default nil :font "Menlo-13"))
 
 (when (memq window-system '(w32))
-  (set-face-attribute 'default nil :font "Consolas-10"))
+  (set-face-attribute 'default nil :font "Consolas-12"))
 
 (when (memq window-system '(x))
   (set-face-attribute 'default nil :font "Inconsolata-12"))
