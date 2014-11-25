@@ -617,7 +617,7 @@
 
 (setq org-cycle-separator-lines 0)
 
-(setq org-blank-before-new-entry (quote ((heading)
+(setq org-blank-before-new-entry (quote ((heading . t)
                                          (plain-list-item . auto))))
 
 (setq org-insert-heading-respect-content nil)
