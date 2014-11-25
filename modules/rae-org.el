@@ -249,7 +249,13 @@
 
               ("h" "Habit" entry
                (file 'org-default-notes-file)
-               "* NEXT %?\n%U\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+               "* NEXT %?\n%U\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
+
+              ("$" "Payment" entry
+               (file 'org-default-notes-file)
+               "* TODO Process %^{client} Payment (%^{amount}) [0/2]\n%U\nSCHEDULED: %^{scheduled}t\n\n- [ ] Transfer to Taxes\n\n#+BEGIN_SRC emacs-lisp :tangle yes\n(* %\\2 (/ 35.0 100.0))\n#+END_SRC\n\n- [ ] Transfer to Savings\n\n#+BEGIN_SRC emacs-lisp :tangle yes\n(* %\\2 (/ 10.0 100.0))\n#+END_SRC\n\n" :clock-in t :clock-resume t)
+
+              )))
 
 ;;;; Tag settings
 ;; Tags with fast selection keys
